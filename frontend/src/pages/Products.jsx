@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { products } from '../data.js';
 import { Search, Filter, SlidersHorizontal, LayoutGrid, List } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
@@ -42,7 +43,7 @@ export default function Products() {
       className="section-padding"
     >
       {/* Search & Toolbelt */}
-      <div style={{ position: 'sticky', top: '90px', z-index: 50, background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(10px)', padding: '1.5rem', borderRadius: '1.5rem', border: '1px solid var(--border)', marginBottom: '4rem', boxShadow: 'var(--shadow-sm)' }}>
+      <div style={{ position: 'sticky', top: '90px', zIndex: 50, background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(10px)', padding: '1.5rem', borderRadius: '1.5rem', border: '1px solid var(--border)', marginBottom: '4rem', boxShadow: 'var(--shadow-sm)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'minmax(200px, 1fr) auto auto', gap: '1.5rem', alignItems: 'center' }}>
           
           {/* Enhanced Search Input */}
