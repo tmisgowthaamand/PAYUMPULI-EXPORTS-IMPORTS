@@ -20,9 +20,9 @@ function Navigation() {
   
   return (
     <header className="header" style={{ boxShadow: '0 10px 30px -10px rgba(0,0,0,0.1)' }}>
-      <div className="header-top" style={{ padding: '0.6rem 5%', background: '#020617', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-        <div style={{ flex: 1, fontSize: '0.75rem', letterSpacing: '1px', opacity: 0.7 }}>GSTIN ID: 33BZEPS1817H2ZE</div>
-        <div className="header-top-info" style={{ fontWeight: '600' }}>
+      <div className="header-top" style={{ padding: '0.6rem 5%', background: '#020617', borderBottom: '1px solid rgba(255,255,255,0.05)', fontWeight: '800' }}>
+        <div style={{ flex: 1, fontSize: '0.75rem', letterSpacing: '1px', opacity: 0.9 }}>GSTIN ID: 33BZEPS1817H2ZE</div>
+        <div className="header-top-info" style={{ fontWeight: '800' }}>
           <motion.span whileHover={{ color: 'var(--secondary-color)' }}><Phone size={13} color="var(--secondary-color)" /> +91 89402 11958</motion.span>
           <motion.span whileHover={{ color: 'var(--secondary-color)' }}><Mail size={13} color="var(--secondary-color)" /> payumpuli79@gmail.com</motion.span>
         </div>
