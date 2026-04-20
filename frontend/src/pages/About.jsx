@@ -30,10 +30,10 @@ export default function About() {
             Our Origins
           </div>
           <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem', color: 'var(--primary-color)', fontWeight: '700' }}>Rooted in Tamil Nadu</h2>
-          <p style={{ fontSize: '1.15rem', color: 'var(--text-gray)', lineHeight: '1.9', marginBottom: '1.5rem' }}>
+          <p style={{ fontSize: '1.15rem', color: '#1e293b', lineHeight: '1.9', marginBottom: '1.5rem' }}>
             Founded in Ramanathapuram, <strong>PAYUMPULI EXPORTS & IMPORTS</strong> operates under the dedicated leadership of Saravanapandian. We grew from a profound respect for local agriculture into a premier commercial exporter.
           </p>
-          <p style={{ fontSize: '1.15rem', color: 'var(--text-gray)', lineHeight: '1.9' }}>
+          <p style={{ fontSize: '1.15rem', color: '#1e293b', lineHeight: '1.9' }}>
             By cutting out unnecessary corporate middlemen, we ensure that the farmers who cultivate our world-class produce are paid fairly, while our international clients secure absolutely uncompromised quality grading.
           </p>
         </motion.div>
@@ -45,7 +45,7 @@ export default function About() {
           <motion.div variants={cardVariants} style={{ background: 'white', padding: '2rem', borderRadius: '24px', boxShadow: 'var(--shadow-md)', border: '1px solid var(--border-color)', transform: 'translateY(2rem)' }}>
             <Globe color="var(--secondary-color)" size={32} style={{ marginBottom: '1rem' }} />
             <h4 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>Global Focus</h4>
-            <p style={{ color: 'var(--text-gray)', fontSize: '0.95rem', lineHeight: '1.6' }}>Logistical superiority delivering to multiple continents.</p>
+            <p style={{ color: '#1e293b', fontSize: '0.95rem', lineHeight: '1.6', fontWeight: '500' }}>Logistical superiority delivering to multiple continents.</p>
           </motion.div>
 
           <motion.div variants={cardVariants} style={{ background: 'var(--primary-color)', color: 'white', padding: '2rem', borderRadius: '24px', boxShadow: 'var(--shadow-md)' }}>
@@ -63,7 +63,7 @@ export default function About() {
           <motion.div variants={cardVariants} style={{ background: 'white', padding: '2rem', borderRadius: '24px', boxShadow: 'var(--shadow-md)', border: '1px solid var(--border-color)' }}>
             <Users color="var(--secondary-color)" size={32} style={{ marginBottom: '1rem' }} />
             <h4 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>Community</h4>
-            <p style={{ color: 'var(--text-gray)', fontSize: '0.95rem', lineHeight: '1.6' }}>Sustaining the regional agricultural economy.</p>
+            <p style={{ color: '#1e293b', fontSize: '0.95rem', lineHeight: '1.6', fontWeight: '500' }}>Sustaining the regional agricultural economy.</p>
           </motion.div>
         </motion.div>
       </div>

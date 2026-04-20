@@ -51,8 +51,8 @@ export default function Contact() {
                 <Building size={28} />
               </div>
               <div>
-                <h4 style={{ fontSize: '1.2rem', marginBottom: '0.4rem', fontWeight: '700' }}>Corporate Headquarters</h4>
-                <p style={{ color: 'var(--text-gray)', lineHeight: '1.7', fontSize: '1.05rem' }}>
+                <h4 style={{ fontSize: '1.2rem', marginBottom: '0.4rem', fontWeight: '700', color: 'var(--primary-color)' }}>Address</h4>
+                <p style={{ color: '#1e293b', lineHeight: '1.7', fontSize: '1.05rem', fontWeight: '500' }}>
                   7/138-5, 1st floor, Eswaran Kovil North Street,<br/>
                   Nainarkovil Road, Emaneswaram (Po),<br/>
                   Paramakudi (Tk), Ramanathapuram - 623701,<br/>
@@ -66,9 +66,9 @@ export default function Contact() {
                 <Phone size={28} />
               </div>
               <div>
-                <h4 style={{ fontSize: '1.2rem', marginBottom: '0.4rem', fontWeight: '700' }}>Direct Export Lines</h4>
-                <p style={{ color: 'var(--text-gray)', fontSize: '1.1rem', marginBottom: '0.2rem' }}>+91 89402 11958</p>
-                <p style={{ color: 'var(--text-gray)', fontSize: '1.1rem' }}>+91 86820 51068</p>
+                <h4 style={{ fontSize: '1.2rem', marginBottom: '0.4rem', fontWeight: '700', color: 'var(--primary-color)' }}>Phone</h4>
+                <p style={{ color: '#1e293b', fontSize: '1.1rem', marginBottom: '0.2rem', fontWeight: '500' }}>+91 89402 11958</p>
+                <p style={{ color: '#1e293b', fontSize: '1.1rem', fontWeight: '500' }}>+91 86820 51068</p>
               </div>
             </motion.div>
 
@@ -77,8 +77,8 @@ export default function Contact() {
                 <Mail size={28} />
               </div>
               <div>
-                <h4 style={{ fontSize: '1.2rem', marginBottom: '0.4rem', fontWeight: '700' }}>Email Operations</h4>
-                <p style={{ color: 'var(--text-gray)', fontSize: '1.1rem' }}>payumpuli79@gmail.com</p>
+                <h4 style={{ fontSize: '1.2rem', marginBottom: '0.4rem', fontWeight: '700', color: 'var(--primary-color)' }}>Email</h4>
+                <p style={{ color: '#1e293b', fontSize: '1.1rem', fontWeight: '500' }}>payumpuli79@gmail.com</p>
               </div>
             </motion.div>
           </div>
