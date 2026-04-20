@@ -1,57 +1,101 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Truck } from 'lucide-react';
-import { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+
+function Reveal({ children, delay = 0 }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-40px' });
+  return (
+    <motion.div ref={ref} initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
+      animate={isInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}>
+      {children}
+    </motion.div>
+  );
+}
+
+function PolicySection({ title, children }) {
+  return (
+    <Reveal>
+      <section style={{ marginBottom: '2.5rem' }}>
+        <h3 style={{ fontSize: '1.1rem', fontWeight: '700', letterSpacing: '-0.02em', paddingBottom: '0.75rem', marginBottom: '1rem', borderBottom: '1px solid var(--border)' }}>{title}</h3>
+        {children}
+      </section>
+    </Reveal>
+  );
+}
+
+function PolicyList({ items }) {
+  return (
+    <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.75rem' }}>
+      {items.map((item, i) => (
+        <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', fontSize: '0.92rem', lineHeight: '1.6' }}>
+          <div style={{ width: '5px', height: '5px', background: 'var(--emerald)', borderRadius: '50%', flexShrink: 0, marginTop: '0.55rem' }} />
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export default function ShippingPolicy() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} style={{ maxWidth: '900px', margin: '0 auto', background: 'white', padding: '4rem', borderRadius: '32px', boxShadow: 'var(--shadow-md)', marginBottom: '5rem', border: '1px solid var(--border-color)' }}>
-      <Link to="/" className="btn" style={{ marginBottom: '3rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#f1f5f9', color: 'var(--primary-color)', boxShadow: 'none' }}>
-        <ArrowLeft size={16} /> Dashboard
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+      style={{ maxWidth: '800px', margin: '0 auto', paddingTop: '2rem', paddingBottom: '4rem' }}>
+      <Link to="/" className="btn btn-ghost" style={{ marginBottom: '2.5rem', display: 'inline-flex' }}>
+        <ArrowLeft size={16} /> Back to Home
       </Link>
-      
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-        <Truck size={32} color="var(--primary-color)" />
-        <h1 style={{ fontSize: '3rem', fontWeight: '800', color: 'var(--primary-color)' }}>Logistics & Shipping</h1>
-      </div>
-      
-      <p style={{ fontWeight: '600', fontSize: '1.2rem', marginBottom: '2.5rem', color: 'var(--secondary-hover)' }}>Streamlined Global Distribution</p>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', lineHeight: '1.9', color: '#1e293b' }}>
-        <p style={{ fontSize: '1.1rem' }}><strong>PAYUMPULI EXPORTS & IMPORTS</strong> leverages a robust supply chain network to ensure that our premium Indian produce reaches the global market in peak condition. We specialize in both domestic wholesale and international bulk logistics.</p>
-
-        <section>
-          <h3 style={{ color: 'var(--primary-color)', borderBottom: '2px solid #f1f5f9', paddingBottom: '0.8rem', marginBottom: '1.2rem', fontWeight: '800' }}>Timeline & Dispatch</h3>
-          <ul style={{ listStyleType: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem', paddingLeft: '0', marginTop: '1rem' }}>
-            {['In-Stock Processing: Within 48 business hours', 'Custom Grading/Milling: 3-5 business days', 'International Transit: Dependent on carrier and port logistics'].map((item, i) => (
-              <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontWeight: '500' }}>
-                <div style={{ width: '6px', height: '6px', background: 'var(--secondary-color)', borderRadius: '50%' }}></div>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section>
-          <h3 style={{ color: 'var(--primary-color)', borderBottom: '2px solid #f1f5f9', paddingBottom: '0.8rem', marginBottom: '1.2rem', fontWeight: '800' }}>Customs & Compliance</h3>
-          <p>We provide all necessary phytosanitary certificates, GSTIN invoices, and grading manifests to ensure smooth customs clearance. Buyers are responsible for applicable import duties specific to their respective territories.</p>
-        </section>
-
-        <div style={{ background: '#f8fafc', padding: '2.5rem', borderRadius: '24px', border: '1px solid #e2e8f0', marginTop: '2rem' }}>
-          <h3 style={{ marginBottom: '1rem', color: 'var(--primary-color)', fontWeight: '800' }}>Track Shipment</h3>
-          <p style={{ marginBottom: '1.5rem', fontWeight: '500' }}>To get the current status of your export allotment, please reach out with your Transaction ID:</p>
-          <address style={{ fontStyle: 'normal', display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: '600', color: 'var(--primary-color)' }}>
-            📞 +91 89402 11958<br/>
-            📍 7/138-5, 1st floor, Eswaran Kovil North Street, Ramanathapuram - 623701
-          </address>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+        <div style={{ width: '40px', height: '40px', borderRadius: 'var(--radius-lg)', background: 'var(--emerald-surface)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Truck size={18} style={{ color: 'var(--emerald)' }} />
         </div>
+        <span className="badge badge-emerald" style={{ fontSize: '0.65rem' }}>Logistics</span>
+      </div>
 
-        <p style={{ marginTop: '3rem', color: 'var(--text-gray)', fontSize: '0.9rem', textAlign: 'center', borderTop: '1px solid #f1f5f9', paddingTop: '2rem' }}>
-          © 2026 PAYUMPULI EXPORTS & IMPORTS. Certified Global Supply Chain.
+      <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '0.75rem', letterSpacing: '-0.04em' }}>
+        Shipping <span className="font-serif" style={{ color: 'var(--emerald)' }}>Policy</span>
+      </h1>
+      <p style={{ color: 'var(--text-tertiary)', fontSize: '1rem', marginBottom: '3rem', lineHeight: '1.7' }}>
+        Global logistics with precision and care.
+      </p>
+
+      <div className="card" style={{ padding: 'clamp(2rem, 4vw, 3rem)', borderRadius: 'var(--radius-3xl)' }}>
+        <Reveal>
+          <p style={{ fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '2rem', color: 'var(--text-secondary)' }}>
+            PAYUMPULI EXPORTS & IMPORTS is committed to delivering your agricultural products safely, on time, and in optimal condition across the globe. Our logistics infrastructure spans major ports and transit corridors.
+          </p>
+        </Reveal>
+
+        <PolicySection title="Domestic Shipping">
+          <PolicyList items={[
+            'Orders dispatched within 3–5 business days post-confirmation',
+            'Pan-India delivery via premium courier partners',
+            'Real-time tracking provided for all shipments',
+            'Free shipping on orders above ₹5,000'
+          ]} />
+        </PolicySection>
+
+        <PolicySection title="International Shipping">
+          <PolicyList items={[
+            'Export shipments processed within 7–14 business days',
+            'Full compliance with destination country import regulations',
+            'Phytosanitary certificates included with all consignments',
+            'Customs duties and import taxes are buyer\'s responsibility'
+          ]} />
+        </PolicySection>
+
+        <PolicySection title="Packaging Standards">
+          <p style={{ fontSize: '0.9rem', color: 'var(--text-tertiary)', lineHeight: '1.7' }}>
+            All products are sealed in food-grade, moisture-resistant packaging designed for long-haul transit. Temperature-sensitive items receive insulated container packaging.
+          </p>
+        </PolicySection>
+
+        <p style={{ marginTop: '2.5rem', color: 'var(--text-muted)', fontSize: '0.78rem', textAlign: 'center', borderTop: '1px solid var(--border)', paddingTop: '1.5rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.02em' }}>
+          Last Revised: August 2026 · © 2026 PAYUMPULI EXPORTS & IMPORTS
         </p>
       </div>
     </motion.div>

@@ -1,56 +1,113 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Gavel } from 'lucide-react';
-import { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { ArrowLeft, FileText } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+
+function Reveal({ children, delay = 0 }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-40px' });
+  return (
+    <motion.div ref={ref} initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
+      animate={isInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}>
+      {children}
+    </motion.div>
+  );
+}
+
+function PolicySection({ title, children }) {
+  return (
+    <Reveal>
+      <section style={{ marginBottom: '2.5rem' }}>
+        <h3 style={{ fontSize: '1.1rem', fontWeight: '700', letterSpacing: '-0.02em', paddingBottom: '0.75rem', marginBottom: '1rem', borderBottom: '1px solid var(--border)' }}>{title}</h3>
+        {children}
+      </section>
+    </Reveal>
+  );
+}
+
+function PolicyList({ items }) {
+  return (
+    <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.75rem' }}>
+      {items.map((item, i) => (
+        <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', fontSize: '0.92rem', lineHeight: '1.6' }}>
+          <div style={{ width: '5px', height: '5px', background: 'var(--gold)', borderRadius: '50%', flexShrink: 0, marginTop: '0.55rem' }} />
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export default function TermsConditions() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} style={{ maxWidth: '900px', margin: '0 auto', background: 'white', padding: '4rem', borderRadius: '32px', boxShadow: 'var(--shadow-md)', marginBottom: '5rem', border: '1px solid var(--border-color)' }}>
-      <Link to="/" className="btn" style={{ marginBottom: '3rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#f1f5f9', color: 'var(--primary-color)', boxShadow: 'none' }}>
-        <ArrowLeft size={16} /> Dashboard
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+      style={{ maxWidth: '800px', margin: '0 auto', paddingTop: '2rem', paddingBottom: '4rem' }}>
+      <Link to="/" className="btn btn-ghost" style={{ marginBottom: '2.5rem', display: 'inline-flex' }}>
+        <ArrowLeft size={16} /> Back to Home
       </Link>
-      
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-        <Gavel size={32} color="var(--primary-color)" />
-        <h1 style={{ fontSize: '3rem', fontWeight: '800', color: 'var(--primary-color)' }}>Terms of Service</h1>
-      </div>
-      
-      <p style={{ fontWeight: '600', fontSize: '1.2rem', marginBottom: '2.5rem', color: 'var(--secondary-hover)' }}>Commercial Governance & Legal Framework</p>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', lineHeight: '1.9', color: '#1e293b' }}>
-        <p style={{ fontSize: '1.1rem' }}>By accessing this trade portal or initiating a commercial allotment, you agree to be bound by the statutory terms governing <strong>PAYUMPULI EXPORTS & IMPORTS</strong>. These terms ensure transparency and legal integrity for both the exporter and the global recipient.</p>
-
-        <section>
-          <h3 style={{ color: 'var(--primary-color)', borderBottom: '2px solid #f1f5f9', paddingBottom: '0.8rem', marginBottom: '1.2rem', fontWeight: '800' }}>Governing Scope</h3>
-          <p>These terms apply to all digital transactions, physical allotments, and commercial inquiries managed by the entity controlled by <strong>Saravanapandian</strong> based in Ramanathapuram, Tamil Nadu.</p>
-        </section>
-
-        <section>
-          <h3 style={{ color: 'var(--primary-color)', borderBottom: '2px solid #f1f5f9', paddingBottom: '0.8rem', marginBottom: '1.2rem', fontWeight: '800' }}>Commercial Pricing</h3>
-          <p>Prices are subject to market fluctuations inherent to agricultural exports. Final pricing recorded at the time of order confirmation and invoicing is binding.</p>
-        </section>
-
-        <section>
-          <h3 style={{ color: 'var(--primary-color)', borderBottom: '2px solid #f1f5f9', paddingBottom: '0.8rem', marginBottom: '1.2rem', fontWeight: '800' }}>Legal Jurisdiction</h3>
-          <p>All trade disputes or legal inquiries are subject to the exclusive jurisdiction of the courts located in <strong>Ramanathapuram</strong>, Tamil Nadu, India.</p>
-        </section>
-
-        <div style={{ background: '#f8fafc', padding: '2.5rem', borderRadius: '24px', border: '1px solid #e2e8f0', marginTop: '2rem' }}>
-          <h3 style={{ marginBottom: '1rem', color: 'var(--primary-color)', fontWeight: '800' }}>Compliance Desk</h3>
-          <address style={{ fontStyle: 'normal', display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: '600', color: 'var(--primary-color)' }}>
-            <strong>PAYUMPULI EXPORTS & IMPORTS</strong><br/>
-            📞 +91 89402 11958<br/>
-            📍 7/138-5, 1st floor, Eswaran Kovil North Street, Emaneswaram, Paramakudi, Ramanathapuram - 623701
-          </address>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+        <div style={{ width: '40px', height: '40px', borderRadius: 'var(--radius-lg)', background: 'var(--gold-surface)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <FileText size={18} style={{ color: 'var(--gold)' }} />
         </div>
+        <span className="badge badge-gold" style={{ fontSize: '0.65rem' }}>Legal</span>
+      </div>
 
-        <p style={{ marginTop: '3rem', color: 'var(--text-gray)', fontSize: '0.9rem', textAlign: 'center', borderTop: '1px solid #f1f5f9', paddingTop: '2rem' }}>
-          Last Updated: 2026<br/>
-          © 2026 PAYUMPULI EXPORTS & IMPORTS. Authentic Indian Origins.
+      <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '0.75rem', letterSpacing: '-0.04em' }}>
+        Terms & <span className="font-serif" style={{ color: 'var(--gold)' }}>Conditions</span>
+      </h1>
+      <p style={{ color: 'var(--text-tertiary)', fontSize: '1rem', marginBottom: '3rem', lineHeight: '1.7' }}>
+        Governing terms for international trade engagement.
+      </p>
+
+      <div className="card" style={{ padding: 'clamp(2rem, 4vw, 3rem)', borderRadius: 'var(--radius-3xl)' }}>
+        <Reveal>
+          <p style={{ fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '2rem', color: 'var(--text-secondary)' }}>
+            By engaging with PAYUMPULI EXPORTS & IMPORTS through this platform, you agree to the following terms and conditions that govern our commercial relationship and trade operations.
+          </p>
+        </Reveal>
+
+        <PolicySection title="Acceptance of Terms">
+          <p style={{ fontSize: '0.9rem', color: 'var(--text-tertiary)', lineHeight: '1.7' }}>
+            By accessing and using this trade portal, you acknowledge that you have read, understood, and agree to be bound by these Terms & Conditions. If you do not agree, please refrain from using our services.
+          </p>
+        </PolicySection>
+
+        <PolicySection title="Product Information">
+          <PolicyList items={[
+            'Product images are representative and may vary in color and texture',
+            'Prices are subject to market fluctuations and may change without prior notice',
+            'All weights and measurements are approximate and within trade tolerance',
+            'Grade certifications are subject to batch-level verification'
+          ]} />
+        </PolicySection>
+
+        <PolicySection title="Order & Payment">
+          <PolicyList items={[
+            'Orders are confirmed only upon successful payment verification',
+            'We reserve the right to cancel orders due to stock unavailability',
+            'Bulk orders may require advance payment or letter of credit',
+            'All prices are in Indian Rupees (INR) unless otherwise specified'
+          ]} />
+        </PolicySection>
+
+        <PolicySection title="Limitation of Liability">
+          <p style={{ fontSize: '0.9rem', color: 'var(--text-tertiary)', lineHeight: '1.7' }}>
+            PAYUMPULI EXPORTS & IMPORTS shall not be liable for any indirect, incidental, or consequential damages arising from the use of our products or services beyond the value of the specific transaction.
+          </p>
+        </PolicySection>
+
+        <PolicySection title="Governing Law">
+          <p style={{ fontSize: '0.9rem', color: 'var(--text-tertiary)', lineHeight: '1.7' }}>
+            These terms are governed by the laws of India, with jurisdiction in the courts of Ramanathapuram, Tamil Nadu.
+          </p>
+        </PolicySection>
+
+        <p style={{ marginTop: '2.5rem', color: 'var(--text-muted)', fontSize: '0.78rem', textAlign: 'center', borderTop: '1px solid var(--border)', paddingTop: '1.5rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.02em' }}>
+          Last Revised: August 2026 · © 2026 PAYUMPULI EXPORTS & IMPORTS
         </p>
       </div>
     </motion.div>
