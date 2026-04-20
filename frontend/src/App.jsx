@@ -105,8 +105,8 @@ function Footer() {
         </div>
       </div>
 
-      <div className="footer-bottom" style={{ borderTop: '1px solid rgba(255,255,255,0.05)', marginTop: '5rem', paddingTop: '3rem', fontWeight: '800' }}>
-        <p>&copy; 2026 PAYUMPULI GLOBAL. All rights recorded.</p>
+      <div className="footer-bottom" style={{ borderTop: '1px solid rgba(255,255,255,0.05)', marginTop: '5rem', paddingTop: '3rem' }}>
+        <p style={{ color: 'white', fontWeight: '900', opacity: 1 }}>&copy; 2026 PAYUMPULI GLOBAL. All rights recorded.</p>
         <div className="footer-bottom-links" style={{ display: 'flex', gap: '3rem', fontWeight: '800', letterSpacing: '0.5px' }}>
           <Link to="/privacy-policy">Privacy</Link>
           <Link to="/shipping-policy">Shipping</Link>
