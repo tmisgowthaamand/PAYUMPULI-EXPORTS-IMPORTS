@@ -1,119 +1,99 @@
-import { Mail, Phone, MapPin, Send, Building } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Building2, MessageSquare } from 'lucide-react';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Contact() {
   const [status, setStatus] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus('Sending inquiry...');
+    setStatus('sending');
     setTimeout(() => {
-      setStatus('Success! Our international trade team will contact you shortly.');
+      setStatus('sent');
+      setTimeout(() => setStatus(''), 3000);
       e.target.reset();
-    }, 1500);
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.15 } }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -30 },
-    show: { opacity: 1, x: 0, transition: { type: 'spring', damping: 20 } }
-  };
-
-  const formVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    show: { opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 100, delay: 0.2 } }
+    }, 2000);
   };
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-      <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-        <motion.h1 initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ type: 'spring' }} style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontFamily: "'Inter', sans-serif", fontWeight: '800', letterSpacing: '-1px', marginBottom: '1rem' }}>
-          Open a <span style={{ color: 'var(--primary-color)' }}>Trade Dialogue</span>
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      className="section-padding"
+    >
+      <div style={{ textAlign: 'center', marginBottom: '8rem' }}>
+        <motion.h1 
+          initial={{ y: 20, opacity: 0 }} 
+          animate={{ y: 0, opacity: 1 }}
+          style={{ fontSize: '5rem', marginBottom: '1.5rem' }}
+        >
+          Let's Start a <span className="font-serif" style={{ color: 'var(--secondary)' }}>Dialogue.</span>
         </motion.h1>
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} style={{ color: 'var(--text-gray)', fontSize: '1.2rem', maxWidth: '500px', margin: '0 auto' }}>
-          We are fully prepared to fulfill your global bulk requirements. Contact our executive team today.
-        </motion.p>
+        <p style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1.25rem', color: 'var(--muted-foreground)' }}>
+          Whether for high-tonnage commercial deals or specific grading inquiries, our trade desk is ready.
+        </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '5rem', alignItems: 'center', marginBottom: '5rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '8rem', alignItems: 'start' }}>
         
-        {/* Contact Info Side */}
-        <motion.div variants={containerVariants} initial="hidden" animate="show" style={{ padding: '1rem' }}>
+        {/* Info Grid */}
+        <div style={{ display: 'grid', gap: '4rem' }}>
+          {[
+            { icon: Building2, title: 'Regional Headquarters', content: '7/138-5, 1st floor, Eswaran Kovil North Street, Emaneswaram, Ramanathapuram - 623701, Tamil Nadu' },
+            { icon: Phone, title: 'Trade Lines', content: '+91 89402 11958 | +91 86820 51068' },
+            { icon: Mail, title: 'Official Email', content: 'payumpuli79@gmail.com' }
+          ].map((item, idx) => (
+            <motion.div 
+              key={idx} 
+              initial={{ x: -20, opacity: 0 }} 
+              animate={{ x: 0, opacity: 1 }} 
+              transition={{ delay: 0.1 * idx }}
+              style={{ display: 'flex', gap: '2rem' }}
+            >
+              <div style={{ width: '64px', height: '64px', background: 'var(--accent)', borderRadius: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <item.icon size={28} color="var(--primary)" />
+              </div>
+              <div>
+                <h4 style={{ fontSize: '1.4rem', marginBottom: '0.75rem' }}>{item.title}</h4>
+                <p style={{ color: 'var(--muted-foreground)', fontSize: '1.1rem', lineHeight: '1.6' }}>{item.content}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Floating Form Card */}
+        <motion.div 
+          initial={{ scale: 0.95, opacity: 0 }} 
+          animate={{ scale: 1, opacity: 1 }}
+          className="card"
+          style={{ padding: '4rem', background: 'var(--primary)', color: 'white', position: 'relative', overflow: 'hidden' }}
+        >
+          <div style={{ position: 'absolute', top: '-10%', right: '-10%', width: '250px', height: '250px', background: 'var(--secondary)', borderRadius: '50%', filter: 'blur(100px)', opacity: 0.1 }}></div>
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
-            <motion.div variants={itemVariants} style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
-              <div style={{ background: 'var(--primary-color)', padding: '1.2rem', borderRadius: '20px', color: 'var(--secondary-color)', boxShadow: 'var(--shadow-md)' }}>
-                <Building size={28} />
-              </div>
-              <div>
-                <h4 style={{ fontSize: '1.2rem', marginBottom: '0.4rem', fontWeight: '700', color: 'var(--primary-color)' }}>Address</h4>
-                <p style={{ color: '#1e293b', lineHeight: '1.7', fontSize: '1.05rem', fontWeight: '500' }}>
-                  7/138-5, 1st floor, Eswaran Kovil North Street,<br/>
-                  Nainarkovil Road, Emaneswaram (Po),<br/>
-                  Paramakudi (Tk), Ramanathapuram - 623701,<br/>
-                  Tamil Nadu, South India
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div variants={itemVariants} style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
-              <div style={{ background: 'var(--primary-color)', padding: '1.2rem', borderRadius: '20px', color: 'var(--secondary-color)', boxShadow: 'var(--shadow-md)' }}>
-                <Phone size={28} />
-              </div>
-              <div>
-                <h4 style={{ fontSize: '1.2rem', marginBottom: '0.4rem', fontWeight: '700', color: 'var(--primary-color)' }}>Phone</h4>
-                <p style={{ color: '#1e293b', fontSize: '1.1rem', marginBottom: '0.2rem', fontWeight: '500' }}>+91 89402 11958</p>
-                <p style={{ color: '#1e293b', fontSize: '1.1rem', fontWeight: '500' }}>+91 86820 51068</p>
-              </div>
-            </motion.div>
-
-            <motion.div variants={itemVariants} style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
-              <div style={{ background: 'var(--primary-color)', padding: '1.2rem', borderRadius: '20px', color: 'var(--secondary-color)', boxShadow: 'var(--shadow-md)' }}>
-                <Mail size={28} />
-              </div>
-              <div>
-                <h4 style={{ fontSize: '1.2rem', marginBottom: '0.4rem', fontWeight: '700', color: 'var(--primary-color)' }}>Email</h4>
-                <p style={{ color: '#1e293b', fontSize: '1.1rem', fontWeight: '500' }}>payumpuli79@gmail.com</p>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Contact Form Side */}
-        <motion.div variants={formVariants} initial="hidden" animate="show" style={{ background: 'white', padding: '3.5rem', borderRadius: '30px', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.1)', border: '1px solid var(--border-color)', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '200px', height: '200px', background: 'var(--secondary-color)', borderRadius: '50%', filter: 'blur(60px)', opacity: '0.1' }}></div>
+          <h3 style={{ color: 'white', fontSize: '2rem', marginBottom: '3rem' }}>Send an Inquiry</h3>
           
-          <h3 style={{ fontSize: '1.8rem', marginBottom: '2rem', fontWeight: '800', letterSpacing: '-0.5px' }}>Transmit Inquiry</h3>
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-              <label style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-gray)', textTransform: 'uppercase', letterSpacing: '1px' }}>Executive Name</label>
-              <motion.input whileFocus={{ scale: 1.01 }} type="text" placeholder="John Doe" required style={{ width: '100%', border: 'none', borderBottom: '2px solid #e2e8f0', background: 'transparent', padding: '1rem 0', outline: 'none', fontSize: '1.1rem', transition: 'border-color 0.3s' }} onFocus={(e) => e.target.style.borderColor = 'var(--primary-color)'} onBlur={(e) => e.target.style.borderColor = '#e2e8f0'} />
+          <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '2rem' }}>
+            <div style={{ display: 'grid', gap: '0.75rem' }}>
+              <label style={{ fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.6)' }}>Full Name</label>
+              <input required type="text" style={{ width: '100%', height: '3.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.75rem', padding: '0 1.5rem', color: 'white', outline: 'none' }} />
             </div>
-            
-            <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-              <label style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-gray)', textTransform: 'uppercase', letterSpacing: '1px' }}>Corporate Email</label>
-              <motion.input whileFocus={{ scale: 1.01 }} type="email" placeholder="john@enterprise.com" required style={{ width: '100%', border: 'none', borderBottom: '2px solid #e2e8f0', background: 'transparent', padding: '1rem 0', outline: 'none', fontSize: '1.1rem', transition: 'border-color 0.3s' }} onFocus={(e) => e.target.style.borderColor = 'var(--primary-color)'} onBlur={(e) => e.target.style.borderColor = '#e2e8f0'} />
+            <div style={{ display: 'grid', gap: '0.75rem' }}>
+              <label style={{ fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.6)' }}>Email Address</label>
+              <input required type="email" style={{ width: '100%', height: '3.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.75rem', padding: '0 1.5rem', color: 'white', outline: 'none' }} />
             </div>
-
-            <div className="form-group" style={{ marginBottom: '2.5rem' }}>
-              <label style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-gray)', textTransform: 'uppercase', letterSpacing: '1px' }}>Logistics Requirements</label>
-              <motion.textarea whileFocus={{ scale: 1.01 }} rows="4" placeholder="Specify tonnages, port destinations, or grading..." required style={{ width: '100%', border: 'none', borderBottom: '2px solid #e2e8f0', background: 'transparent', padding: '1rem 0', outline: 'none', fontSize: '1.1rem', resize: 'none', transition: 'border-color 0.3s' }} onFocus={(e) => e.target.style.borderColor = 'var(--primary-color)'} onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}></motion.textarea>
+            <div style={{ display: 'grid', gap: '0.75rem' }}>
+              <label style={{ fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.6)' }}>Manifest Requirements</label>
+              <textarea required rows="5" style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.75rem', padding: '1.5rem', color: 'white', outline: 'none', resize: 'none' }}></textarea>
             </div>
 
-            <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} type="submit" className="btn btn-primary" style={{ width: '100%', padding: '1.2rem', fontSize: '1.1rem', borderRadius: '16px' }}>
-              <Send size={18} /> Transmit Request
-            </motion.button>
-            
-            {status && (
-              <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} style={{ marginTop: '1.5rem', color: status.includes('Success') ? 'var(--success)' : 'var(--primary-color)', textAlign: 'center', fontWeight: '600' }}>
-                {status}
-              </motion.p>
-            )}
+            <button 
+              disabled={status === 'sending'}
+              className="btn" 
+              style={{ background: 'var(--secondary)', color: 'var(--primary)', height: '4rem', borderRadius: '1rem', width: '100%', fontSize: '1.1rem' }}
+            >
+              {status === 'sending' ? 'Transmitting...' : status === 'sent' ? 'Inquiry Delivered!' : 'Send Inquiry'}
+              {status === '' && <Send size={20} />}
+            </button>
           </form>
         </motion.div>
       </div>

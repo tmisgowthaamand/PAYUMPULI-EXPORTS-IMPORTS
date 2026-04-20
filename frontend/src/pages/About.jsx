@@ -1,72 +1,126 @@
-import { Shield, Globe, Users, Target } from 'lucide-react';
+import { Shield, Globe, Users, Target, Award, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function About() {
-  const textVariants = {
-    hidden: { opacity: 0, x: -30 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1, 
+      transition: { staggerChildren: 0.15 } 
+    }
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { type: 'spring', damping: 20, stiffness: 100 } }
+  const slideIn = {
+    hidden: { x: -50, opacity: 0 },
+    visible: { x: 0, opacity: 1, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
   };
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-      {/* Editorial Header */}
-      <div style={{ textAlign: 'center', padding: '6rem 2rem', marginBottom: '4rem', background: 'radial-gradient(circle at center, rgba(15, 23, 42, 0.05) 0%, transparent 70%)' }}>
-        <motion.h1 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ fontSize: 'clamp(3rem, 6vw, 4.5rem)', color: 'var(--primary-color)', marginBottom: '1.5rem', fontFamily: "'Playfair Display', serif", fontWeight: '800' }}>
-          Cultivating <span style={{ fontStyle: 'italic', color: 'var(--secondary-hover)' }}>Trust.</span> <br/>Delivering <span style={{ fontStyle: 'italic', color: 'var(--secondary-hover)' }}>Quality.</span>
-        </motion.h1>
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} style={{ color: 'var(--text-gray)', fontSize: '1.25rem', maxWidth: '600px', margin: '0 auto', letterSpacing: '0.5px' }}>
-          Bridging the gap between the rich agricultural soils of South India and the demands of modern global enterprise.
-        </motion.p>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 1fr) minmax(300px, 1.2fr)', gap: '6rem', alignItems: 'center', marginBottom: '8rem' }}>
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={textVariants}>
-          <div style={{ display: 'inline-block', padding: '0.5rem 1rem', background: 'rgba(15, 23, 42, 0.05)', borderRadius: '50px', fontSize: '0.9rem', marginBottom: '1.5rem', fontWeight: '600', color: 'var(--primary-color)', letterSpacing: '1px', textTransform: 'uppercase' }}>
-            Our Origins
+    <motion.div 
+      initial="hidden" 
+      whileInView="visible" 
+      viewport={{ once: true, margin: "-100px" }}
+      variants={containerVariants}
+      className="section-padding"
+    >
+      {/* Editorial Title */}
+      <section style={{ marginBottom: '10rem' }}>
+        <motion.div variants={slideIn} style={{ maxWidth: '900px' }}>
+          <span style={{ color: 'var(--secondary)', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.9rem', marginBottom: '1.5rem', display: 'block' }}>
+            Established Excellence Since 1979
+          </span>
+          <h1 style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)', marginBottom: '3rem', lineHeight: '0.9' }}>
+            The Architecture of <br />
+            <span className="font-serif" style={{ color: 'var(--muted-foreground)', opacity: 0.5 }}>Export Integrity.</span>
+          </h1>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
+            <p style={{ fontSize: '1.2rem', color: 'var(--muted-foreground)', borderLeft: '2px solid var(--border)', paddingLeft: '2rem' }}>
+              Founded in the heritage-rich soils of Tamil Nadu, PAYUMPULI EXPORTS & IMPORTS represents the bridge between traditional Indian agriculture and the precision requirements of the global market.
+            </p>
+            <p style={{ fontSize: '1.1rem', color: '#1e293b', fontWeight: '500' }}>
+              Led by Saravanapandian, our mission is built on the pillars of transparency, direct-to-farm sourcing, and uncompromising logistical excellence.
+            </p>
           </div>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem', color: 'var(--primary-color)', fontWeight: '700' }}>Rooted in Tamil Nadu</h2>
-          <p style={{ fontSize: '1.15rem', color: '#1e293b', lineHeight: '1.9', marginBottom: '1.5rem' }}>
-            Founded in Ramanathapuram, <strong>PAYUMPULI EXPORTS & IMPORTS</strong> operates under the dedicated leadership of Saravanapandian. We grew from a profound respect for local agriculture into a premier commercial exporter.
-          </p>
-          <p style={{ fontSize: '1.15rem', color: '#1e293b', lineHeight: '1.9' }}>
-            By cutting out unnecessary corporate middlemen, we ensure that the farmers who cultivate our world-class produce are paid fairly, while our international clients secure absolutely uncompromised quality grading.
-          </p>
+        </motion.div>
+      </section>
+
+      {/* Narrative Section 1 */}
+      <section style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '6rem', alignItems: 'center', marginBottom: '10rem' }}>
+        <motion.div 
+          variants={slideIn}
+          style={{ 
+            aspectRatio: '4/5', 
+            background: 'var(--accent)', 
+            borderRadius: '2rem', 
+            overflow: 'hidden',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '4rem',
+            position: 'relative'
+          }}
+        >
+          <div style={{ position: 'absolute', top: '2rem', left: '2rem', background: 'var(--primary)', color: 'white', padding: '1rem 2rem', borderRadius: '1rem', fontWeight: '700', fontSize: '1.2rem' }}>
+            EST. 1979
+          </div>
+          <motion.div 
+            animate={{ rotate: 360 }} 
+            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+            style={{ width: '300px', height: '300px', border: '1px dashed var(--border)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >
+            <Globe size={100} color="var(--primary)" style={{ opacity: 0.1 }} />
+          </motion.div>
         </motion.div>
 
-        {/* Floating Feature Grid */}
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ staggerChildren: 0.2 }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', position: 'relative' }}>
-          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '200px', height: '200px', background: 'var(--secondary-color)', borderRadius: '50%', filter: 'blur(80px)', opacity: '0.1' }}></div>
-          
-          <motion.div variants={cardVariants} style={{ background: 'white', padding: '2rem', borderRadius: '24px', boxShadow: 'var(--shadow-md)', border: '1px solid var(--border-color)', transform: 'translateY(2rem)' }}>
-            <Globe color="var(--secondary-color)" size={32} style={{ marginBottom: '1rem' }} />
-            <h4 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>Global Focus</h4>
-            <p style={{ color: '#1e293b', fontSize: '0.95rem', lineHeight: '1.6', fontWeight: '500' }}>Logistical superiority delivering to multiple continents.</p>
-          </motion.div>
-
-          <motion.div variants={cardVariants} style={{ background: 'var(--primary-color)', color: 'white', padding: '2rem', borderRadius: '24px', boxShadow: 'var(--shadow-md)' }}>
-            <Target color="#4ade80" size={32} style={{ marginBottom: '1rem' }} />
-            <h4 style={{ color: 'white', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Precision</h4>
-            <p style={{ color: '#cbd5e1', fontSize: '0.95rem', lineHeight: '1.6' }}>Executing high-tonnage exports rapidly and legally.</p>
-          </motion.div>
-
-          <motion.div variants={cardVariants} style={{ background: 'var(--primary-color)', color: 'white', padding: '2rem', borderRadius: '24px', boxShadow: 'var(--shadow-md)', transform: 'translateY(2rem)' }}>
-            <Shield color="var(--secondary-color)" size={32} style={{ marginBottom: '1rem' }} />
-            <h4 style={{ color: 'white', fontSize: '1.2rem', marginBottom: '0.5rem' }}>Integrity</h4>
-            <p style={{ color: '#cbd5e1', fontSize: '0.95rem', lineHeight: '1.6' }}>Zero deviations on phytosanitary and QA metrics.</p>
-          </motion.div>
-
-          <motion.div variants={cardVariants} style={{ background: 'white', padding: '2rem', borderRadius: '24px', boxShadow: 'var(--shadow-md)', border: '1px solid var(--border-color)' }}>
-            <Users color="var(--secondary-color)" size={32} style={{ marginBottom: '1rem' }} />
-            <h4 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>Community</h4>
-            <p style={{ color: '#1e293b', fontSize: '0.95rem', lineHeight: '1.6', fontWeight: '500' }}>Sustaining the regional agricultural economy.</p>
-          </motion.div>
+        <motion.div variants={slideIn}>
+          <h2 style={{ fontSize: '3.5rem', marginBottom: '2.5rem' }}>Direct Sourcing. <br/> Zero Compromise.</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            {[
+              { title: 'Global Compliance', desc: 'Every shipment is verified against stringent international phytosanitary and QA metrics.', icon: Shield },
+              { title: 'Farmers First', desc: 'We operate without middlemen, ensuring maximum value for regional agricultural communities.', icon: Users },
+              { title: 'Logistics Precision', desc: 'Real-time tracking and temperature-controlled supply chains for perishable excellence.', icon: Target }
+            ].map((item, idx) => (
+              <div key={idx} style={{ display: 'flex', gap: '1.5rem' }}>
+                <div style={{ width: '48px', height: '48px', background: 'var(--primary)', color: 'white', borderRadius: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <item.icon size={24} />
+                </div>
+                <div>
+                  <h4 style={{ fontSize: '1.25rem', marginBottom: '0.4rem' }}>{item.title}</h4>
+                  <p style={{ color: 'var(--muted-foreground)' }}>{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </motion.div>
-      </div>
+      </section>
+
+      {/* Commitment Banner */}
+      <motion.section 
+        variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
+        style={{ 
+          background: 'var(--primary)', 
+          color: 'white', 
+          padding: '5rem 4rem', 
+          borderRadius: '3rem', 
+          textAlign: 'center',
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+      >
+        <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '300px', height: '300px', background: 'var(--secondary)', borderRadius: '50%', filter: 'blur(100px)', opacity: 0.15 }}></div>
+        <h2 style={{ color: 'white', fontSize: '3rem', marginBottom: '1.5rem' }}>Certified to Serve the World.</h2>
+        <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto 3rem' }}>
+          Our quality management systems are recognized by international accreditation bodies, ensuring your trade remains secure and seamless.
+        </p>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '4rem', flexWrap: 'wrap' }}>
+          {['ISO 9001', 'FSSAI Certified', 'Export Promotion Council', 'Logistics Gold'].map((badge, idx) => (
+            <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', fontWeight: '700', fontSize: '1.1rem' }}>
+              <CheckCircle size={20} color="var(--secondary)" />
+              {badge}
+            </div>
+          ))}
+        </div>
+      </motion.section>
     </motion.div>
   );
 }
