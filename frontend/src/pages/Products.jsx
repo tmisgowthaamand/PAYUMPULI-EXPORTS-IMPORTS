@@ -179,8 +179,8 @@ export default function Products() {
         marginBottom: '1.5rem'
       }}>
         <span style={{ 
-          fontFamily: 'var(--font-mono)', fontSize: '0.72rem', fontWeight: '500',
-          color: 'var(--text-muted)', letterSpacing: '0.04em', textTransform: 'uppercase'
+          fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: '800',
+          color: 'var(--text-primary)', letterSpacing: '0.04em', textTransform: 'uppercase'
         }}>
           Showing {filteredProducts.length} of {products.length} products
         </span>
