@@ -1,78 +1,60 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, RefreshCcw } from 'lucide-react';
 import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 export default function RefundPolicy() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
-    <div className="animate-fade" style={{ maxWidth: '800px', margin: '0 auto', background: 'white', padding: '3rem', borderRadius: 'var(--radius)', boxShadow: 'var(--shadow-sm)', marginBottom: '4rem' }}>
-      <Link to="/" className="btn" style={{ marginBottom: '2rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'var(--bg-main)', color: 'var(--text-dark)' }}>
-        <ArrowLeft size={16} /> Back to Home
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} style={{ maxWidth: '900px', margin: '0 auto', background: 'white', padding: '4rem', borderRadius: '32px', boxShadow: 'var(--shadow-md)', marginBottom: '5rem', border: '1px solid var(--border-color)' }}>
+      <Link to="/" className="btn" style={{ marginBottom: '3rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#f1f5f9', color: 'var(--primary-color)', boxShadow: 'none' }}>
+        <ArrowLeft size={16} /> Dashboard
       </Link>
       
-      <h1 style={{ marginBottom: '1.5rem', fontSize: '2.5rem' }}>Cancellation & Refund Policy</h1>
-      <p style={{ fontWeight: '500', marginBottom: '2rem', color: 'var(--text-gray)' }}>Fair, Transparent, and Customer-Friendly</p>
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', lineHeight: '1.8' }}>
-        <p>At <strong>PAYUMPULI EXPORTS & IMPORTS</strong>, customer satisfaction is our priority. While we strive to deliver high-quality products and services, we understand that cancellations or refunds may occasionally be required. This policy outlines how we handle such requests in a clear and transparent manner.</p>
-
-        <h3 style={{ color: 'var(--primary-color)', marginTop: '1rem' }}>Order Cancellations</h3>
-        <p><strong>Cancellation Window:</strong><br/>
-        Orders can be cancelled within 2 hours of purchase, provided they have not yet been processed, packed, or dispatched.</p>
-        <p>Once an order has been shipped or handed over to the courier, cancellations are no longer possible.</p>
-        <p>To cancel an order, customers must contact our support team with their Order ID.</p>
-
-        <h3 style={{ color: 'var(--primary-color)', marginTop: '1rem' }}>Returns & Replacements</h3>
-        <p>We accept returns or offer replacements in the following situations:</p>
-        <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', color: 'var(--text-gray)' }}>
-          <li>Product received is damaged in transit.</li>
-          <li>Wrong item delivered.</li>
-          <li>Verified manufacturing/quality defects.</li>
-        </ul>
-        <p><strong>Conditions for Returns:</strong></p>
-        <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', color: 'var(--text-gray)' }}>
-          <li>Return requests must be raised within 48 hours of delivery.</li>
-          <li>The product must be unused, with all original packaging and invoices intact.</li>
-        </ul>
-
-        <h3 style={{ color: 'var(--primary-color)', marginTop: '1rem' }}>Non-Returnable Items</h3>
-        <p>We cannot accept returns/refunds for:</p>
-        <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', color: 'var(--text-gray)' }}>
-          <li>Products damaged due to customer misuse, negligence, or improper storage.</li>
-          <li>Items without original packaging or invoice.</li>
-          <li>Opened bulk packages or consumables.</li>
-          <li>Custom orders or special bulk requests.</li>
-        </ul>
-
-        <h3 style={{ color: 'var(--primary-color)', marginTop: '1rem' }}>Refund Process</h3>
-        <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', color: 'var(--text-gray)' }}>
-          <li>Once approved, refunds are initiated within 3–5 business days.</li>
-          <li>Refunds are processed via the original payment method (UPI, bank transfer, card, etc.).</li>
-          <li>Depending on the payment provider, refunds may take 5–10 business days to reflect in your account.</li>
-          <li>In certain cases, refunds may be issued as store credit or replacement based on customer preference.</li>
-        </ul>
-
-        <h3 style={{ color: 'var(--primary-color)', marginTop: '1rem' }}>Exceptions</h3>
-        <p>Refunds/cancellations are not applicable in cases of:</p>
-        <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', color: 'var(--text-gray)' }}>
-          <li>Delays caused by logistics/courier providers beyond our control.</li>
-          <li>Customer unavailability during scheduled delivery.</li>
-          <li>Price fluctuations after order placement.</li>
-        </ul>
-
-        <h3 style={{ color: 'var(--primary-color)', marginTop: '1rem' }}>Need Help?</h3>
-        <p>For cancellation, return, or refund assistance, please contact:</p>
-        <div style={{ background: 'var(--bg-main)', padding: '1.5rem', borderRadius: 'var(--radius)', marginTop: '0.5rem' }}>
-          <strong>PAYUMPULI EXPORTS & IMPORTS</strong><br/>
-          📍 7/138-5, 1st floor, Eswaran Kovil North Street, Emaneswaram, Paramakudi, Ramanathapuram, Tamil Nadu - 623701<br/>
-          📞 +91 89402 11958<br/>
-          📧 Email: payumpuli79@gmail.com<br/>
-          🌐 Website: www.payumpuliexports.com
-        </div>
-        <p style={{ marginTop: '1rem', color: 'var(--text-gray)', fontSize: '0.9rem' }}>Our team is available Mon–Sat, 10 AM – 7 PM IST.</p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+        <RefreshCcw size={32} color="var(--primary-color)" />
+        <h1 style={{ fontSize: '3rem', fontWeight: '800', color: 'var(--primary-color)' }}>Returns & Refunds</h1>
       </div>
-    </div>
+      
+      <p style={{ fontWeight: '600', fontSize: '1.2rem', marginBottom: '2.5rem', color: 'var(--secondary-hover)' }}>Commitment to Commercial Quality</p>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', lineHeight: '1.9', color: '#1e293b' }}>
+        <p style={{ fontSize: '1.1rem' }}>As an international export entity, <strong>PAYUMPULI EXPORTS & IMPORTS</strong> maintains rigorous grading standards. We strive for absolute satisfaction, but our refund protocols are dictated by the nature of perishable and commercial-grade agricultural products.</p>
+
+        <section>
+          <h3 style={{ color: 'var(--primary-color)', borderBottom: '2px solid #f1f5f9', paddingBottom: '0.8rem', marginBottom: '1.2rem', fontWeight: '800' }}>Eligibility for Claims</h3>
+          <p>Refunds or replacements are evaluated strictly under the following conditions:</p>
+          <ul style={{ listStyleType: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem', paddingLeft: '0', marginTop: '1rem' }}>
+            {['Damaged upon arrival (Photographic evidence required)', 'Incorrect product/grade dispatched compared to manifest', 'Significant weight discrepancies exceeding standard moisture loss margins'].map((item, i) => (
+              <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontWeight: '500' }}>
+                <div style={{ width: '6px', height: '6px', background: 'var(--secondary-color)', borderRadius: '50%' }}></div>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section>
+          <h3 style={{ color: 'var(--primary-color)', borderBottom: '2px solid #f1f5f9', paddingBottom: '0.8rem', marginBottom: '1.2rem', fontWeight: '800' }}>Processing Protocol</h3>
+          <p>All claims must be initiated within <strong>48 hours</strong> of physical receipt at the destination port or address. Our QA team will audit the shipment logs and grading certificates before authorizing a credit or replacement.</p>
+        </section>
+
+        <div style={{ background: '#f8fafc', padding: '2.5rem', borderRadius: '24px', border: '1px solid #e2e8f0', marginTop: '2rem' }}>
+          <h3 style={{ marginBottom: '1rem', color: 'var(--primary-color)', fontWeight: '800' }}>Initiate a Claim</h3>
+          <p style={{ marginBottom: '1.5rem', fontWeight: '500' }}>Please provide your order ID and proof of damage to:</p>
+          <address style={{ fontStyle: 'normal', display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: '600', color: 'var(--primary-color)' }}>
+            📧 <strong>payumpuli79@gmail.com</strong><br/>
+            📞 +91 89402 11958
+          </address>
+        </div>
+
+        <p style={{ marginTop: '3rem', color: 'var(--text-gray)', fontSize: '0.9rem', textAlign: 'center', borderTop: '1px solid #f1f5f9', paddingTop: '2rem' }}>
+          © 2026 PAYUMPULI EXPORTS & IMPORTS. Precision Commercial Grading.
+        </p>
+      </div>
+    </motion.div>
   );
 }

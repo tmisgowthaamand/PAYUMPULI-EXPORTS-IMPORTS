@@ -1,82 +1,59 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Truck } from 'lucide-react';
 import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 export default function ShippingPolicy() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
-    <div className="animate-fade" style={{ maxWidth: '800px', margin: '0 auto', background: 'white', padding: '3rem', borderRadius: 'var(--radius)', boxShadow: 'var(--shadow-sm)', marginBottom: '4rem' }}>
-      <Link to="/" className="btn" style={{ marginBottom: '2rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'var(--bg-main)', color: 'var(--text-dark)' }}>
-        <ArrowLeft size={16} /> Back to Home
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} style={{ maxWidth: '900px', margin: '0 auto', background: 'white', padding: '4rem', borderRadius: '32px', boxShadow: 'var(--shadow-md)', marginBottom: '5rem', border: '1px solid var(--border-color)' }}>
+      <Link to="/" className="btn" style={{ marginBottom: '3rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#f1f5f9', color: 'var(--primary-color)', boxShadow: 'none' }}>
+        <ArrowLeft size={16} /> Dashboard
       </Link>
       
-      <h1 style={{ marginBottom: '1.5rem', fontSize: '2.5rem' }}>Shipping Policy</h1>
-      <p style={{ fontWeight: '500', marginBottom: '2rem', color: 'var(--text-gray)' }}>Safe, Reliable, and On-Time Delivery of Your Exports</p>
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', lineHeight: '1.8' }}>
-        <p>At <strong>PAYUMPULI EXPORTS & IMPORTS</strong>, we are committed to delivering your products securely and within the promised time frame. This Shipping Policy outlines our procedures for order processing, delivery, charges, and customer support.</p>
-
-        <h3 style={{ color: 'var(--primary-color)', marginTop: '1rem' }}>Order Processing Time</h3>
-        <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', color: 'var(--text-gray)' }}>
-          <li>Orders are processed within 2–4 business days after payment confirmation.</li>
-          <li>Orders placed on Sundays or public holidays are processed on the next working day.</li>
-          <li>In the case of high-demand or out-of-stock products, customers will be notified with revised timelines or offered alternatives.</li>
-        </ul>
-
-        <h3 style={{ color: 'var(--primary-color)', marginTop: '1rem' }}>Shipping Destinations & Delivery Timelines</h3>
-        <h4 style={{ color: 'var(--text-dark)' }}>Domestic Shipping (India)</h4>
-        <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', color: 'var(--text-gray)' }}>
-          <li>Metro Cities: 3–7 business days after dispatch</li>
-          <li>Non-Metro Cities: 5–10 business days after dispatch</li>
-          <li>Remote/Rural Areas: 7–12 business days after dispatch</li>
-        </ul>
-        <h4 style={{ color: 'var(--text-dark)' }}>International Shipping</h4>
-        <p>At present, international shipping is dependent on bulk inquiry. Please contact us directly for specific international freight timelines and charges.</p>
-
-        <h3 style={{ color: 'var(--primary-color)', marginTop: '1rem' }}>Shipping Charges</h3>
-        <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', color: 'var(--text-gray)' }}>
-          <li>Shipping charges vary based on product category, weight, dimensions, and destination.</li>
-          <li>Large bulk exports may incur special handling charges due to size and logistics.</li>
-          <li>Free shipping offers may be available during promotions or for orders above a certain value.</li>
-        </ul>
-
-        <h3 style={{ color: 'var(--primary-color)', marginTop: '1rem' }}>Packaging & Handling</h3>
-        <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', color: 'var(--text-gray)' }}>
-          <li>All products are packed in industry-approved packaging to ensure safe transit.</li>
-          <li>Fragile items are double-cushioned and clearly labeled.</li>
-          <li>Customers are advised to check packaging at the time of delivery. If tampering or damage is visible, the delivery should be reported immediately.</li>
-        </ul>
-
-        <h3 style={{ color: 'var(--primary-color)', marginTop: '1rem' }}>Tracking Your Order</h3>
-        <p>Once dispatched, you will receive:</p>
-        <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', color: 'var(--text-gray)' }}>
-          <li>A tracking number via SMS/email</li>
-          <li>A tracking link for real-time shipment updates</li>
-        </ul>
-        <p>Please allow 24–48 hours for tracking details to update after dispatch.</p>
-
-        <h3 style={{ color: 'var(--primary-color)', marginTop: '1rem' }}>Delays & Exceptions</h3>
-        <p>While we strive for prompt delivery, delays may occur due to:</p>
-        <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', color: 'var(--text-gray)' }}>
-          <li>Courier/logistics disruptions</li>
-          <li>Regional holidays or strikes</li>
-          <li>Extreme weather or natural calamities</li>
-          <li>Customer unavailability at the time of delivery</li>
-        </ul>
-        <p>In such cases, our support team will keep you informed and assist with rescheduling.</p>
-
-        <h3 style={{ color: 'var(--primary-color)', marginTop: '1rem' }}>Need Help With Shipping?</h3>
-        <p>For shipping-related questions, please contact:</p>
-        <div style={{ background: 'var(--bg-main)', padding: '1.5rem', borderRadius: 'var(--radius)', marginTop: '0.5rem' }}>
-          <strong>PAYUMPULI EXPORTS & IMPORTS</strong><br/>
-          📍 7/138-5, 1st floor, Eswaran Kovil North Street, Emaneswaram, Paramakudi, Ramanathapuram, Tamil Nadu - 623701<br/>
-          📞 +91 89402 11958<br/>
-          📧 Email: payumpuli79@gmail.com<br/>
-          🌐 Website: www.payumpuliexports.com
-        </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+        <Truck size={32} color="var(--primary-color)" />
+        <h1 style={{ fontSize: '3rem', fontWeight: '800', color: 'var(--primary-color)' }}>Logistics & Shipping</h1>
       </div>
-    </div>
+      
+      <p style={{ fontWeight: '600', fontSize: '1.2rem', marginBottom: '2.5rem', color: 'var(--secondary-hover)' }}>Streamlined Global Distribution</p>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', lineHeight: '1.9', color: '#1e293b' }}>
+        <p style={{ fontSize: '1.1rem' }}><strong>PAYUMPULI EXPORTS & IMPORTS</strong> leverages a robust supply chain network to ensure that our premium Indian produce reaches the global market in peak condition. We specialize in both domestic wholesale and international bulk logistics.</p>
+
+        <section>
+          <h3 style={{ color: 'var(--primary-color)', borderBottom: '2px solid #f1f5f9', paddingBottom: '0.8rem', marginBottom: '1.2rem', fontWeight: '800' }}>Timeline & Dispatch</h3>
+          <ul style={{ listStyleType: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem', paddingLeft: '0', marginTop: '1rem' }}>
+            {['In-Stock Processing: Within 48 business hours', 'Custom Grading/Milling: 3-5 business days', 'International Transit: Dependent on carrier and port logistics'].map((item, i) => (
+              <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontWeight: '500' }}>
+                <div style={{ width: '6px', height: '6px', background: 'var(--secondary-color)', borderRadius: '50%' }}></div>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section>
+          <h3 style={{ color: 'var(--primary-color)', borderBottom: '2px solid #f1f5f9', paddingBottom: '0.8rem', marginBottom: '1.2rem', fontWeight: '800' }}>Customs & Compliance</h3>
+          <p>We provide all necessary phytosanitary certificates, GSTIN invoices, and grading manifests to ensure smooth customs clearance. Buyers are responsible for applicable import duties specific to their respective territories.</p>
+        </section>
+
+        <div style={{ background: '#f8fafc', padding: '2.5rem', borderRadius: '24px', border: '1px solid #e2e8f0', marginTop: '2rem' }}>
+          <h3 style={{ marginBottom: '1rem', color: 'var(--primary-color)', fontWeight: '800' }}>Track Shipment</h3>
+          <p style={{ marginBottom: '1.5rem', fontWeight: '500' }}>To get the current status of your export allotment, please reach out with your Transaction ID:</p>
+          <address style={{ fontStyle: 'normal', display: 'flex', flexDirection: 'column', gap: '0.5rem', fontWeight: '600', color: 'var(--primary-color)' }}>
+            📞 +91 89402 11958<br/>
+            📍 7/138-5, 1st floor, Eswaran Kovil North Street, Ramanathapuram - 623701
+          </address>
+        </div>
+
+        <p style={{ marginTop: '3rem', color: 'var(--text-gray)', fontSize: '0.9rem', textAlign: 'center', borderTop: '1px solid #f1f5f9', paddingTop: '2rem' }}>
+          © 2026 PAYUMPULI EXPORTS & IMPORTS. Certified Global Supply Chain.
+        </p>
+      </div>
+    </motion.div>
   );
 }
