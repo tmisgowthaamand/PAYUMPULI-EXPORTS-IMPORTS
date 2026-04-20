@@ -5,7 +5,7 @@ import ProductCard from '../components/ProductCard';
 import { motion } from 'framer-motion';
 
 export default function Home() {
-  const featured = products.slice(0, 4);
+  const featured = products.slice(0, 6);
 
   const containerVariants = {
     hidden: { opacity: 0 },
