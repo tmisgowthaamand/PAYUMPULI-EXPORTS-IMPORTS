@@ -106,12 +106,12 @@ function Footer() {
       </div>
 
       <div className="footer-bottom" style={{ borderTop: '1px solid rgba(255,255,255,0.05)', marginTop: '5rem', paddingTop: '3rem' }}>
-        <p style={{ color: 'white', fontWeight: '900', opacity: 1 }}>&copy; 2026 PAYUMPULI GLOBAL. All rights recorded.</p>
-        <div className="footer-bottom-links" style={{ display: 'flex', gap: '3rem', fontWeight: '800', letterSpacing: '0.5px' }}>
-          <Link to="/privacy-policy">Privacy</Link>
-          <Link to="/shipping-policy">Shipping</Link>
-          <Link to="/refund-policy">Returns</Link>
-          <Link to="/terms">Terms</Link>
+        <p style={{ color: 'var(--secondary-color)', fontWeight: '900', opacity: 1 }}>&copy; 2026 PAYUMPULI GLOBAL. All rights recorded.</p>
+        <div className="footer-bottom-links" style={{ display: 'flex', gap: '3rem', fontWeight: '800', letterSpacing: '0.5px', color: 'var(--secondary-color)' }}>
+          <Link to="/privacy-policy" style={{ color: 'var(--secondary-color)' }}>Privacy</Link>
+          <Link to="/shipping-policy" style={{ color: 'var(--secondary-color)' }}>Shipping</Link>
+          <Link to="/refund-policy" style={{ color: 'var(--secondary-color)' }}>Returns</Link>
+          <Link to="/terms" style={{ color: 'var(--secondary-color)' }}>Terms</Link>
         </div>
       </div>
     </footer>
