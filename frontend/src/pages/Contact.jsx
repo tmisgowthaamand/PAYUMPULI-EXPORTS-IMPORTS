@@ -147,7 +147,7 @@ export default function Contact() {
                 </p>
 
                 {/* Quick Stats Grid */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
                   {[
                     { num: '< 24h', label: 'Response Target' },
                     { num: 'Global', label: 'CIF / FOB Operations' },

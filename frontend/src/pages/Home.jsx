@@ -31,12 +31,12 @@ export default function Home() {
   ];
 
   const categories = [
-    { name: 'Palm Jaggery', desc: 'Pure, unrefined natural sweetener from palmyra palms', count: 6, color: '#92400e', emoji: '🌴' },
-    { name: 'Turmeric', desc: 'High-curcumin varieties from heritage Tamil Nadu farms', count: 5, color: '#ca8a04', emoji: '🌿' },
-    { name: 'Senna Auriculata', desc: 'Medicinal-grade Avaram flower & leaf products', count: 7, color: '#15803d', emoji: '🍃' },
-    { name: 'Black Gram', desc: 'Protein-rich organic Urad Dal, whole & powdered', count: 5, color: '#1e40af', emoji: '🫘' },
-    { name: 'Neem Products', desc: 'Traditional oral care & wellness neem sticks', count: 5, color: '#0f766e', emoji: '🌱' },
-    { name: 'Palmyra Root', desc: 'Organic tuber varieties for speciality cuisines', count: 5, color: '#7c3aed', emoji: '🌾' },
+    { name: 'Palm Jaggery', desc: 'Pure, unrefined natural sweetener from palmyra palms', count: 6, color: '#92400e', image: '/products/WhatsApp Image 2026-04-15 at 15.47.03 (1).jpeg' },
+    { name: 'Turmeric', desc: 'High-curcumin varieties from heritage Tamil Nadu farms', count: 5, color: '#ca8a04', image: '/products/WhatsApp Image 2026-04-15 at 15.47.06 (1).jpeg' },
+    { name: 'Senna Auriculata', desc: 'Medicinal-grade Avaram flower & leaf products', count: 7, color: '#15803d', image: '/products/WhatsApp Image 2026-04-15 at 15.47.05 (2).jpeg' },
+    { name: 'Black Gram', desc: 'Protein-rich organic Urad Dal, whole & powdered', count: 5, color: '#1e40af', image: '/products/WhatsApp Image 2026-04-15 at 15.47.05 (1).jpeg' },
+    { name: 'Neem Products', desc: 'Traditional oral care & wellness neem sticks', count: 5, color: '#0f766e', image: '/products/WhatsApp Image 2026-04-15 at 15.47.08 (1).jpeg' },
+    { name: 'Palmyra Root', desc: 'Organic tuber varieties for speciality cuisines', count: 5, color: '#7c3aed', image: '/products/WhatsApp Image 2026-04-15 at 15.47.14.jpeg' },
   ];
 
   const trustBadges = ['FSSAI Certified', 'ISO 9001:2015', 'Export Grade A', '100% Organic'];
@@ -220,8 +220,12 @@ export default function Home() {
                     background: `radial-gradient(circle at top right, ${cat.color}20 0%, transparent 70%)`,
                     transition: 'opacity 0.4s', opacity: 0.6,
                   }} />
-                  <div style={{ fontSize: '2.5rem', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))' }}>
-                    {cat.emoji}
+                  <div style={{ 
+                    width: '56px', height: '56px', borderRadius: '50%', overflow: 'hidden', 
+                    border: `2px solid ${cat.color}30`, flexShrink: 0,
+                    boxShadow: 'var(--shadow-md)'
+                  }}>
+                    <img src={cat.image} alt={cat.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                   <div>
                     <h3 style={{ fontWeight: '800', fontSize: '1.25rem', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>
