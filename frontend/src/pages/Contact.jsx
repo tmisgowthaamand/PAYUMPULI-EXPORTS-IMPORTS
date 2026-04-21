@@ -40,9 +40,9 @@ export default function Contact() {
       color: 'var(--sapphire)'
     },
     {
-      icon: Globe,
+      icon: Clock,
       title: 'Operational Hours',
-      content: 'Mon - Sat: 9:00 AM - 6:00 PM IST \n 24/7 Support for Active Shipments',
+      content: 'Mon - Sun: 9:00 AM - 6:00 PM IST \n 24/7 Support for Active Shipments',
       color: 'var(--gold)'
     }
   ];

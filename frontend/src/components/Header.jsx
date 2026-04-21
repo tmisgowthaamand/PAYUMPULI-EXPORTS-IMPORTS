@@ -52,19 +52,32 @@ export default function Header() {
 
       {/* Main Header */}
       <div className="header-main">
-        <Link to="/" className="logo">
-          <span style={{ position: 'relative', marginRight: '0.35rem' }}>
-            PAYUMPULI
-            <motion.span
-              style={{
-                position: 'absolute', bottom: '-2px', left: 0, right: 0,
-                height: '2px', background: 'var(--gold)',
-                borderRadius: 'var(--radius-full)', opacity: 0.5,
-              }}
-              layoutId="logo-underline"
-            />
-          </span>
-          <span className="logo-accent">EXPORTS & IMPORTS</span>
+        <Link to="/" className="logo" style={{ display: 'flex', alignItems: 'center' }}>
+          <img 
+            src="/logo.jpeg" 
+            alt="Payumpuli Logo" 
+            style={{ 
+              height: '45px', 
+              width: 'auto', 
+              marginRight: '0.75rem', 
+              borderRadius: '50%',
+              border: '2px solid var(--gold-light)'
+            }} 
+          />
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.35rem' }}>
+            <span style={{ position: 'relative' }}>
+              PAYUMPULI
+              <motion.span
+                style={{
+                  position: 'absolute', bottom: '-2px', left: 0, right: 0,
+                  height: '2px', background: 'var(--gold)',
+                  borderRadius: 'var(--radius-full)', opacity: 0.5,
+                }}
+                layoutId="logo-underline"
+              />
+            </span>
+            <span className="logo-accent">EXPORTS & IMPORTS</span>
+          </div>
         </Link>
 
         <nav className="nav-links" style={{

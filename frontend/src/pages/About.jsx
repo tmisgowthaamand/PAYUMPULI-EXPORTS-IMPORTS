@@ -69,49 +69,95 @@ export default function About() {
         }} />
 
         <motion.div style={{ scale: heroScale, opacity: heroOpacity, zIndex: 1 }}>
-          <Reveal>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2.5rem' }}>
-              <span className="badge" style={{
-                background: 'var(--sapphire-surface)', borderColor: 'rgba(37,99,235,0.3)',
-                color: 'var(--sapphire)', fontSize: '0.75rem', padding: '0.5rem 1rem'
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'space-between', 
+            gap: '4rem',
+            flexWrap: 'wrap-reverse'
+          }}>
+            <div style={{ flex: '1 1 600px' }}>
+              <Reveal>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2.5rem' }}>
+                  <span className="badge" style={{
+                    background: 'var(--sapphire-surface)', borderColor: 'rgba(37,99,235,0.3)',
+                    color: 'var(--sapphire)', fontSize: '0.75rem', padding: '0.5rem 1rem'
+                  }}>
+                    <Sparkles size={12} /> Heritage Built • 2020 to 2026
+                  </span>
+                </div>
+              </Reveal>
+              
+              <h1 style={{
+                fontSize: 'clamp(3.5rem, 9vw, 6.5rem)',
+                marginBottom: '2.5rem',
+                lineHeight: '0.9',
+                letterSpacing: '-0.05em',
+                fontWeight: 900,
+                textTransform: 'uppercase'
               }}>
-                <Sparkles size={12} /> Heritage Built • 2020 to 2026
-              </span>
-            </div>
-          </Reveal>
-          
-          <h1 style={{
-            fontSize: 'clamp(3.5rem, 9vw, 6.5rem)',
-            marginBottom: '2.5rem',
-            lineHeight: '0.9',
-            letterSpacing: '-0.05em',
-            fontWeight: 900,
-            textTransform: 'uppercase'
-          }}>
-            <Reveal delay={0.1}>Architects of</Reveal>
-            <Reveal delay={0.2}><span className="font-serif" style={{ color: 'var(--sapphire)', textTransform: 'none' }}>Global Trade.</span></Reveal>
-          </h1>
+                <Reveal delay={0.1}>Architects of</Reveal>
+                <Reveal delay={0.2}><span className="font-serif" style={{ color: 'var(--sapphire)', textTransform: 'none' }}>Global Trade.</span></Reveal>
+              </h1>
 
-          <div style={{
-            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '3rem', maxWidth: '1000px'
-          }}>
-            <Reveal delay={0.3}>
-              <AnimatedText 
-                text="Founded in 2020 in the heritage-rich soils of Tamil Nadu, PAYUMPULI EXPORTS & IMPORTS bridges the gap between traditional Indian agriculture and the precision metrics of the global market."
-                style={{
-                  fontSize: '1.2rem', color: 'var(--text-tertiary)',
-                  borderLeft: '4px solid var(--sapphire)', paddingLeft: '1.5rem',
-                  lineHeight: '1.8'
-                }}
-                delay={0.4}
-              />
-            </Reveal>
-            <Reveal delay={0.4}>
-              <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', fontWeight: '500', lineHeight: '1.8' }}>
-                Since starting our business in 2020, our mission has rested entirely on the pillars of absolute transparency, ethical direct-to-farm sourcing, and uncompromising logistical excellence worldwide.
-              </p>
-            </Reveal>
+              <div style={{
+                display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                gap: '3rem', maxWidth: '1000px'
+              }}>
+                <Reveal delay={0.3}>
+                  <AnimatedText 
+                    text="Founded in 2020 in the heritage-rich soils of Tamil Nadu, PAYUMPULI EXPORTS & IMPORTS bridges the gap between traditional Indian agriculture and the precision metrics of the global market."
+                    style={{
+                      fontSize: '1.2rem', color: 'var(--text-tertiary)',
+                      borderLeft: '4px solid var(--sapphire)', paddingLeft: '1.5rem',
+                      lineHeight: '1.8'
+                    }}
+                    delay={0.4}
+                  />
+                </Reveal>
+                <Reveal delay={0.4}>
+                  <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', fontWeight: '500', lineHeight: '1.8' }}>
+                    Since starting our business in 2020, our mission has rested entirely on the pillars of absolute transparency, ethical direct-to-farm sourcing, and uncompromising logistical excellence worldwide.
+                  </p>
+                </Reveal>
+              </div>
+            </div>
+
+            <div style={{ flex: '1 1 300px', display: 'flex', justifyContent: 'center', position: 'relative' }}>
+              <Reveal delay={0.5} duration={0.8} x={20}>
+                <motion.div
+                  whileHover={{ scale: 1.05, rotate: 2 }}
+                  style={{ 
+                    position: 'relative',
+                    padding: '1rem',
+                    background: 'white',
+                    borderRadius: '50%',
+                    boxShadow: 'var(--shadow-2xl)',
+                    border: '1px solid var(--border)',
+                    maxWidth: '450px'
+                  }}
+                >
+                  <div style={{
+                    position: 'absolute',
+                    inset: '-20px',
+                    background: 'radial-gradient(circle, var(--sapphire-surface) 0%, transparent 70%)',
+                    zIndex: -1,
+                    borderRadius: '50%',
+                    opacity: 0.6
+                  }} />
+                  <img 
+                    src="/logo.jpeg" 
+                    alt="Payumpuli Logo" 
+                    style={{ 
+                      width: '100%', 
+                      height: 'auto', 
+                      borderRadius: '50%',
+                      display: 'block'
+                    }} 
+                  />
+                </motion.div>
+              </Reveal>
+            </div>
           </div>
         </motion.div>
       </section>

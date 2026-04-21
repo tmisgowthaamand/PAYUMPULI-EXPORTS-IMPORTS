@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Sun } from 'lucide-react';
 
 /**
  * Premium footer with ambient glow, brand info, navigation, and contact.
@@ -66,6 +66,28 @@ export default function Footer() {
             <li>
               <Mail className="icon" size={14} />
               <span>payumpuli79@gmail.com</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Availability Column */}
+        <div className="footer-links">
+          <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <Sun size={12} style={{ color: 'var(--gold)' }} /> Availability
+          </h3>
+          <ul style={{ gap: '1rem' }}>
+            <li style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: 'rgba(255,255,255,0.9)', fontSize: '0.85rem' }}>
+                <Clock size={14} style={{ color: 'var(--gold)' }} />
+                <span>Mon - Sun</span>
+              </div>
+              <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', paddingLeft: '1.5rem' }}>9:00 AM - 6:00 PM IST</span>
+            </li>
+            <li style={{ marginTop: '0.5rem', padding: '0.75rem', background: 'rgba(212,160,23,0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(212,160,23,0.1)' }}>
+              <p style={{ fontSize: '0.75rem', color: 'var(--gold-light)', margin: 0, lineHeight: '1.4' }}>
+                <strong>24/7 Logistics Support</strong><br />
+                Available for all active shipments and transit emergencies.
+              </p>
             </li>
           </ul>
         </div>
