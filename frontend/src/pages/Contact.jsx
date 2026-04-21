@@ -36,7 +36,7 @@ export default function Contact() {
     {
       icon: Mail,
       title: 'Export Operations Desk',
-      content: 'payumpuli79@gmail.com',
+      content: 'contact@payumpuli.shop \n payumpuli79@gmail.com',
       color: 'var(--sapphire)'
     },
     {

@@ -187,8 +187,9 @@ export default function TermsConditions() {
               <strong>PAYUMPULI EXPORTS & IMPORTS</strong><br/>
               📍 7/138-5, 1st floor, Eswaran Kovil North Street, Emaneswaram, Paramakudi, Ramanathapuram - 623701, Tamil Nadu<br/>
               📞 +91 89402 11958<br/>
-              📧 Email: payumpuli79@gmail.com<br/>
-              🌐 Website: www.payumpuli.com
+              📧 Email: contact@payumpuli.shop<br/>
+              📧 Support: payumpuli79@gmail.com<br/>
+              🌐 Website: www.payumpuli.shop
             </address>
           </div>
         </Reveal>
