@@ -36,7 +36,7 @@ export default function Contact() {
     {
       icon: Mail,
       title: 'Export Operations Desk',
-      content: 'contact@payumpuli.shop \n payumpuli79@gmail.com',
+      content: 'payumpuliexportsimports079@gmail.com',
       color: 'var(--sapphire)'
     },
     {
@@ -300,7 +300,8 @@ export default function Contact() {
                   {item.title}
                 </h4>
                 <p style={{
-                  color: 'var(--text-tertiary)', fontSize: '0.95rem', lineHeight: '1.7', whiteSpace: 'pre-line'
+                  color: 'var(--text-tertiary)', fontSize: '0.95rem', lineHeight: '1.7', 
+                  whiteSpace: 'pre-line', overflowWrap: 'anywhere', wordBreak: 'break-word'
                 }}>
                   {item.content}
                 </p>

@@ -65,11 +65,7 @@ export default function Footer() {
             </li>
             <li>
               <Mail className="icon" size={14} />
-              <span>contact@payumpuli.shop</span>
-            </li>
-            <li>
-              <Mail className="icon" size={14} />
-              <span>payumpuli79@gmail.com</span>
+              <span style={{ overflowWrap: 'anywhere', wordBreak: 'break-word' }}>payumpuliexportsimports079@gmail.com</span>
             </li>
           </ul>
         </div>

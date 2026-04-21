@@ -46,8 +46,7 @@ export default function Header() {
         </div>
         <div className="header-top-info">
           <span><Phone size={11} /> +91 89402 11958</span>
-          <span><Mail size={11} /> contact@payumpuli.shop</span>
-          <span style={{ opacity: 0.7, fontSize: '0.65rem' }}><Mail size={11} /> payumpuli79@gmail.com</span>
+          <span style={{ overflowWrap: 'anywhere', wordBreak: 'break-word' }}><Mail size={11} /> payumpuliexportsimports079@gmail.com</span>
         </div>
       </div>
 
