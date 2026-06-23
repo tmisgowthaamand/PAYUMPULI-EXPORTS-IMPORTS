@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { products } from '../data.js';
 import { Search, SlidersHorizontal, LayoutGrid, List, ArrowUpRight, Package } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -11,14 +11,56 @@ export default function Products() {
   const [search, setSearch] = useState('');
   const [sortOrder, setSortOrder] = useState('default');
   const [viewMode, setViewMode] = useState('grid');
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const categoryNames = ['all', 'Palm Jaggery', 'Turmeric', 'Senna', 'Black Gram', 'Neem', 'Palmyra', 'Jaggery Powder', 'Palm Candy', 'Jamun'];
+  const activeCategory = searchParams.get('category') || 'all';
+
+  const setActiveCategory = (cat) => {
+    if (cat === 'all') {
+      searchParams.delete('category');
+    } else {
+      searchParams.set('category', cat);
+    }
+    setSearchParams(searchParams);
+  };
+
+  const categoryNames = [
+    'all',
+    'agriculture',
+    'dress',
+    'Palm Jaggery',
+    'Turmeric',
+    'Senna',
+    'Black Gram',
+    'Neem',
+    'Palmyra',
+    'Jaggery Powder',
+    'Palm Candy',
+    'Jamun'
+  ];
+
+  const getCategoryDisplayName = (cat) => {
+    if (cat === 'all') return 'All Catalog';
+    if (cat === 'agriculture') return 'Agricultural Exports';
+    if (cat === 'dress') return 'Dress & Apparel';
+    return cat;
+  };
 
   let filteredProducts = products.filter(p => {
     const matchSearch = p.name.toLowerCase().includes(search.toLowerCase()) || 
       p.description.toLowerCase().includes(search.toLowerCase());
-    const matchCategory = activeCategory === 'all' || p.name.toLowerCase().includes(activeCategory.toLowerCase());
+    
+    let matchCategory = false;
+    if (activeCategory === 'all') {
+      matchCategory = true;
+    } else if (activeCategory === 'agriculture') {
+      matchCategory = p.category !== 'dress';
+    } else if (activeCategory === 'dress') {
+      matchCategory = p.category === 'dress';
+    } else {
+      // Legacy agricultural sub-filters: match by name
+      matchCategory = p.name.toLowerCase().includes(activeCategory.toLowerCase()) && p.category !== 'dress';
+    }
     return matchSearch && matchCategory;
   });
 
@@ -77,10 +119,10 @@ export default function Products() {
               fontFamily: 'var(--font-body)',
               cursor: 'pointer',
               transition: 'all 0.2s ease',
-              textTransform: cat === 'all' ? 'capitalize' : 'none'
+              textTransform: (cat === 'all' || cat === 'agriculture' || cat === 'dress') ? 'capitalize' : 'none'
             }}
           >
-            {cat === 'all' ? 'All Products' : cat}
+            {getCategoryDisplayName(cat)}
           </motion.button>
         ))}
       </motion.div>
@@ -256,7 +298,7 @@ export default function Products() {
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.4rem' }}>
                         <h3 style={{ fontSize: '0.95rem', fontWeight: '700', letterSpacing: '-0.01em', lineHeight: '1.3' }}>{product.name}</h3>
                         <span className="badge badge-gold" style={{ flexShrink: 0, fontSize: '0.65rem', padding: '0.25rem 0.6rem' }}>
-                          ₹{product.pricePerGram}/g
+                          {product.isDress ? `₹${product.apparelPrice.total} pack` : (product.name.toLowerCase().includes('neem') ? `₹${(product.pricePerGram * 12).toFixed(0)}/12 pcs` : `₹${product.pricePerGram}/g`)}
                         </span>
                       </div>
                       <p style={{
@@ -299,7 +341,22 @@ export default function Products() {
                           fontFamily: 'var(--font-mono)', fontSize: '0.85rem',
                           fontWeight: '700', color: 'var(--text-primary)' 
                         }}>
-                          ₹{product.pricePerGram}<span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>/g</span>
+                          {product.isDress ? (
+                            <>
+                              ₹{product.apparelPrice.total}
+                              <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>/pack</span>
+                            </>
+                          ) : product.name.toLowerCase().includes('neem') ? (
+                            <>
+                              ₹{(product.pricePerGram * 12).toFixed(0)}
+                              <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>/12 pcs</span>
+                            </>
+                          ) : (
+                            <>
+                              ₹{product.pricePerGram}
+                              <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>/g</span>
+                            </>
+                          )}
                         </span>
                       </div>
                       <p style={{ color: 'var(--text-tertiary)', fontSize: '0.82rem', marginBottom: '0.75rem' }}>

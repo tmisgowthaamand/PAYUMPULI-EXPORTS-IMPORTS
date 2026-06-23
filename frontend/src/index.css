@@ -1021,3 +1021,13 @@ h4 { font-size: 1.125rem; }
     linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px);
   background-size: 80px 80px;
 }
+
+/* ── Custom Dropdown Menu ── */
+.dropdown-item:hover {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+}
+.nav-dropdown-trigger {
+  cursor: pointer;
+}
+

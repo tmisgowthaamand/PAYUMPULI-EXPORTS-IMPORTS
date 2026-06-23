@@ -369,11 +369,11 @@ export default function Checkout() {
                               {item.product.name}
                             </h4>
                             <p style={{ 
-                              color: 'rgba(255,255,255,0.4)', fontSize: '0.72rem', 
-                              fontFamily: 'var(--font-mono)' 
-                            }}>
-                              {item.grams}g
-                            </p>
+                               color: 'rgba(255,255,255,0.4)', fontSize: '0.72rem', 
+                               fontFamily: 'var(--font-mono)' 
+                             }}>
+                               {item.product.isDress ? `Size: ${item.size} | Qty: ${item.quantity} ${item.quantity === 1 ? 'pack' : 'packs'}` : (item.product.name.toLowerCase().includes('neem') ? `${item.grams} pcs` : `${item.grams}g`)}
+                             </p>
                             <p style={{ 
                               color: 'var(--gold)', fontWeight: '700', marginTop: '0.25rem', 
                               fontSize: '0.92rem' 
@@ -382,18 +382,18 @@ export default function Checkout() {
                             </p>
                           </div>
                           <motion.button 
-                            whileHover={{ scale: 1.15, color: '#fca5a5' }}
-                            whileTap={{ scale: 0.9 }}
-                            onClick={() => removeFromCart(item.product.id)}
-                            style={{ 
-                              background: 'transparent', border: 'none', 
-                              color: 'rgba(255,255,255,0.25)', cursor: 'pointer',
-                              position: 'absolute', top: '0.75rem', right: '0.75rem',
-                              padding: '0.25rem'
-                            }}
-                          >
-                            <Trash2 size={14} />
-                          </motion.button>
+                             whileHover={{ scale: 1.15, color: '#fca5a5' }}
+                             whileTap={{ scale: 0.9 }}
+                             onClick={() => removeFromCart(item.product.id, item.size)}
+                             style={{ 
+                               background: 'transparent', border: 'none', 
+                               color: 'rgba(255,255,255,0.25)', cursor: 'pointer',
+                               position: 'absolute', top: '0.75rem', right: '0.75rem',
+                               padding: '0.25rem'
+                             }}
+                           >
+                             <Trash2 size={14} />
+                           </motion.button>
                         </motion.div>
                       ))}
                     </AnimatePresence>

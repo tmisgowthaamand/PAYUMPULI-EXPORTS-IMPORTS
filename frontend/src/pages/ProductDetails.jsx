@@ -13,15 +13,20 @@ export default function ProductDetails() {
   const product = products.find(p => p.id === parseInt(id));
   const { addToCart } = useCart();
   
-  const [grams, setGrams] = useState(100);
+  const isNeemSticks = product && product.name.toLowerCase().includes('neem');
+  const [grams, setGrams] = useState(isNeemSticks ? 12 : 100);
+  const [size, setSize] = useState('M');
+  const [qtyPacks, setQtyPacks] = useState(1);
   const [isAdded, setIsAdded] = useState(false);
   const [imageHover, setImageHover] = useState(false);
 
-  const quickWeights = [50, 100, 250, 500, 1000];
+  const quickWeights = isNeemSticks ? [12, 24, 36, 48, 60] : [50, 100, 250, 500, 1000];
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [id]);
+    setGrams(product?.name.toLowerCase().includes('neem') ? 12 : 100);
+    setIsAdded(false);
+  }, [id, product]);
 
   // Get related products
   const relatedProducts = products
@@ -130,237 +135,461 @@ export default function ProductDetails() {
           initial={{ opacity: 0, x: 30 }} 
           animate={{ opacity: 1, x: 0 }} 
           transition={{ delay: 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          style={{ width: '100%' }}
         >
-          {/* Title Section */}
-          <div style={{ marginBottom: '2rem' }}>
-            <span className="badge" style={{ 
-              marginBottom: '1rem', display: 'inline-flex', fontSize: '0.65rem'
-            }}>
-              Certified Export Product
-            </span>
-            <h1 style={{ 
-              fontSize: 'clamp(2rem, 4vw, 2.75rem)', lineHeight: '1.1', 
-              marginBottom: '1rem', fontWeight: '800',
-              letterSpacing: '-0.035em'
-            }}>
-              {product.name}
-            </h1>
-            <p style={{ 
-              color: 'var(--text-tertiary)', fontSize: '1rem', lineHeight: '1.75' 
-            }}>
-              {product.description}
-            </p>
-          </div>
-          
-          {/* Pricing & Quantity Card */}
-          <div style={{ 
-            background: 'white', padding: '2rem', borderRadius: 'var(--radius-3xl)', 
-            border: '1px solid var(--border)', marginBottom: '2rem',
-            boxShadow: 'var(--shadow-sm)'
-          }}>
-            {/* Price */}
-            <div style={{ 
-              display: 'flex', alignItems: 'baseline', gap: '0.5rem', 
-              marginBottom: '1.75rem', paddingBottom: '1.75rem',
-              borderBottom: '1px solid var(--border)'
-            }}>
-              <span style={{ 
-                fontSize: '2.25rem', fontWeight: '800', letterSpacing: '-0.03em',
-                fontFamily: 'var(--font-display)'
-              }}>
-                ₹{product.pricePerGram.toFixed(2)}
-              </span>
-              <span style={{ 
-                fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: '500' 
-              }}>
-                per gram
-              </span>
-            </div>
+          {product.isDress ? (
+            /* ══════ DRESS DETAILS (AMAZON-STYLE) ══════ */
+            <div>
+              {/* Title Section */}
+              <div style={{ marginBottom: '1.5rem' }}>
+                <span className="badge badge-gold" style={{ marginBottom: '0.75rem', display: 'inline-flex', fontSize: '0.65rem' }}>
+                  Premium Apparel Export
+                </span>
+                <h1 style={{ 
+                  fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', lineHeight: '1.15', 
+                  marginBottom: '0.75rem', fontWeight: '800',
+                  letterSpacing: '-0.03em'
+                }}>
+                  {product.name}
+                </h1>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+                  <div style={{ display: 'flex', color: 'var(--gold)' }}>
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={14} fill="currentColor" stroke="none" />
+                    ))}
+                  </div>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>(Export Grade Certified)</span>
+                </div>
+                <p style={{ 
+                  color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.65' 
+                }}>
+                  {product.description}
+                </p>
+              </div>
 
-            {/* Quick Weight Selection */}
-            <div style={{ marginBottom: '1.25rem' }}>
-              <label style={{ 
-                display: 'block', marginBottom: '0.75rem', fontWeight: '600', 
-                fontSize: '0.78rem', textTransform: 'uppercase', 
-                letterSpacing: '0.06em', color: 'var(--text-muted)',
-                fontFamily: 'var(--font-mono)'
+              {/* Color Selection Display */}
+              <div style={{ marginBottom: '1.5rem' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+                  Pack Contents / Colors
+                </span>
+                <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+                  {product.colors.map((color, idx) => (
+                    <span 
+                      key={idx} 
+                      style={{ 
+                        padding: '0.3rem 0.75rem', 
+                        background: 'var(--bg-secondary)', 
+                        border: '1px solid var(--border)',
+                        borderRadius: 'var(--radius-md)', 
+                        fontSize: '0.78rem',
+                        fontWeight: '600',
+                        color: 'var(--text-secondary)'
+                      }}
+                    >
+                      {color}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Pricing & Selection Grid */}
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                gap: '1.5rem',
+                marginBottom: '2rem'
               }}>
-                Quick Select
-              </label>
-              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                {quickWeights.map(w => (
-                  <motion.button
-                    key={w}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => { setGrams(w); setIsAdded(false); }}
-                    style={{
-                      padding: '0.45rem 0.9rem',
-                      borderRadius: 'var(--radius-full)',
-                      border: '1px solid',
-                      borderColor: grams === w ? 'var(--text-primary)' : 'var(--border)',
-                      background: grams === w ? 'var(--text-primary)' : 'transparent',
-                      color: grams === w ? 'var(--text-inverse)' : 'var(--text-secondary)',
-                      fontSize: '0.78rem',
-                      fontWeight: '600',
-                      cursor: 'pointer',
-                      fontFamily: 'var(--font-body)',
-                      transition: 'all 0.2s'
+                {/* Amazon Pricing Table */}
+                <div style={{ 
+                  background: 'white', padding: '1.5rem', borderRadius: 'var(--radius-2xl)', 
+                  border: '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: '0.85rem'
+                }}>
+                  <h3 style={{ fontSize: '0.9rem', fontWeight: '700', borderBottom: '1px solid var(--border)', paddingBottom: '0.5rem', marginBottom: '0.25rem' }}>
+                    Pricing Breakdown
+                  </h3>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem' }}>
+                    <span style={{ color: 'var(--text-tertiary)' }}>Price per piece</span>
+                    <span style={{ fontWeight: '600' }}>₹{product.apparelPrice.basePrice}</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem' }}>
+                    <span style={{ color: 'var(--text-tertiary)' }}>Minimum Pack Qty</span>
+                    <span style={{ fontWeight: '600' }}>x {product.apparelPrice.minQty} pcs</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', borderBottom: '1px dashed var(--border)', paddingBottom: '0.5rem' }}>
+                    <span style={{ color: 'var(--text-tertiary)' }}>Apparel Subtotal</span>
+                    <span style={{ fontWeight: '600' }}>₹{product.apparelPrice.basePrice * product.apparelPrice.minQty}</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem' }}>
+                    <span style={{ color: 'var(--text-tertiary)' }}>Logistics & Duty Surcharge</span>
+                    <span style={{ fontWeight: '600', color: 'var(--emerald)' }}>+ ₹{product.apparelPrice.surcharge}</span>
+                  </div>
+                  <div style={{ 
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'center', 
+                    borderTop: '1px solid var(--border)', paddingTop: '0.75rem', marginTop: '0.25rem'
+                  }}>
+                    <span style={{ fontSize: '0.78rem', fontWeight: '700', color: 'var(--text-primary)' }}>Pack Total</span>
+                    <span style={{ fontSize: '1.25rem', fontWeight: '800', color: 'var(--text-primary)' }}>
+                      ₹{product.apparelPrice.total}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Buy Box */}
+                <div style={{ 
+                  background: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: 'var(--radius-2xl)', 
+                  border: '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: '1rem'
+                }}>
+                  <div>
+                    <span style={{ fontSize: '0.78rem', color: 'var(--emerald)', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                      <Check size={12} /> In Stock (Export Ready)
+                    </span>
+                    <div style={{ fontSize: '1.65rem', fontWeight: '800', marginTop: '0.25rem', fontFamily: 'var(--font-display)' }}>
+                      ₹{(qtyPacks * product.apparelPrice.total).toLocaleString('en-IN')}.00
+                    </div>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Estimated Delivery: 5 - 10 Business Days</span>
+                  </div>
+
+                  {/* Size Selector */}
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.4rem', fontFamily: 'var(--font-mono)' }}>
+                      Select Size
+                    </label>
+                    <div style={{ display: 'flex', gap: '0.35rem' }}>
+                      {['S', 'M', 'L', 'XL', 'XXL'].map(s => (
+                        <button
+                          key={s}
+                          onClick={() => { setSize(s); setIsAdded(false); }}
+                          style={{
+                            width: '36px', height: '36px', borderRadius: 'var(--radius-md)',
+                            border: '1px solid',
+                            borderColor: size === s ? 'var(--text-primary)' : 'var(--border)',
+                            background: size === s ? 'var(--text-primary)' : 'white',
+                            color: size === s ? 'white' : 'var(--text-secondary)',
+                            fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer', transition: 'all 0.2s'
+                          }}
+                        >
+                          {s}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Quantity selector (packs) */}
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.4rem', fontFamily: 'var(--font-mono)' }}>
+                      Packs Quantity
+                    </label>
+                    <div style={{ display: 'flex', alignItems: 'center', background: 'white', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', width: 'fit-content', padding: '0.2rem' }}>
+                      <button 
+                        onClick={() => { setQtyPacks(Math.max(1, qtyPacks - 1)); setIsAdded(false); }}
+                        style={{ background: 'none', border: 'none', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+                      >
+                        <Minus size={12} />
+                      </button>
+                      <span style={{ width: '32px', textAlign: 'center', fontSize: '0.85rem', fontWeight: '700' }}>{qtyPacks}</span>
+                      <button 
+                        onClick={() => { setQtyPacks(qtyPacks + 1); setIsAdded(false); }}
+                        style={{ background: 'none', border: 'none', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+                      >
+                        <Plus size={12} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Add to Cart Button */}
+                  <motion.button 
+                    whileHover={{ scale: 1.015 }}
+                    whileTap={{ scale: 0.985 }}
+                    className="btn btn-primary" 
+                    style={{ width: '100%', borderRadius: 'var(--radius-xl)', height: '2.85rem', fontSize: '0.85rem', marginTop: '0.5rem' }} 
+                    onClick={() => {
+                      addToCart(product, 0, qtyPacks * product.apparelPrice.total, size, qtyPacks);
+                      setIsAdded(true);
                     }}
                   >
-                    {w}g
+                    <AnimatePresence mode='wait'>
+                      {isAdded ? (
+                        <motion.span key="added" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <Check size={16} /> Added to Manifest
+                        </motion.span>
+                      ) : (
+                        <motion.span key="add" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <ShoppingCart size={16} /> Add to Manifest
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
                   </motion.button>
+                </div>
+              </div>
+
+              {/* Amazon About This Item Section */}
+              <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.5rem', marginBottom: '2rem' }}>
+                <h3 style={{ fontSize: '1rem', fontWeight: '800', marginBottom: '0.75rem' }}>About this item</h3>
+                <ul style={{ paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  {product.bulletPoints.map((bp, i) => (
+                    <li key={i} style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>{bp}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Technical Specifications Table */}
+              <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
+                <h3 style={{ fontSize: '1rem', fontWeight: '800', marginBottom: '0.75rem' }}>Technical Specifications</h3>
+                <div style={{ border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', overflow: 'hidden' }}>
+                  {Object.entries(product.specs).map(([key, val], idx) => (
+                    <div 
+                      key={key} 
+                      style={{ 
+                        display: 'flex', 
+                        fontSize: '0.82rem', 
+                        borderBottom: idx === Object.keys(product.specs).length - 1 ? 'none' : '1px solid var(--border)',
+                        background: idx % 2 === 0 ? 'var(--bg-secondary)' : 'white'
+                      }}
+                    >
+                      <div style={{ width: '150px', padding: '0.6rem 1rem', fontWeight: '700', color: 'var(--text-secondary)', borderRight: '1px solid var(--border)' }}>
+                        {key}
+                      </div>
+                      <div style={{ padding: '0.6rem 1rem', color: 'var(--text-primary)', flexGrow: 1 }}>
+                        {val}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            /* ══════ LEGACY AGRICULTURAL DETAILS ══════ */
+            <div>
+              {/* Title Section */}
+              <div style={{ marginBottom: '2rem' }}>
+                <span className="badge" style={{ marginBottom: '1rem', display: 'inline-flex', fontSize: '0.65rem' }}>
+                  Certified Export Product
+                </span>
+                <h1 style={{ 
+                  fontSize: 'clamp(2rem, 4vw, 2.75rem)', lineHeight: '1.1', 
+                  marginBottom: '1rem', fontWeight: '800',
+                  letterSpacing: '-0.035em'
+                }}>
+                  {product.name}
+                </h1>
+                <p style={{ 
+                  color: 'var(--text-tertiary)', fontSize: '1rem', lineHeight: '1.75' 
+                }}>
+                  {product.description}
+                </p>
+              </div>
+              
+              {/* Pricing & Quantity Card */}
+              <div style={{ 
+                background: 'white', padding: '2rem', borderRadius: 'var(--radius-3xl)', 
+                border: '1px solid var(--border)', marginBottom: '2rem',
+                boxShadow: 'var(--shadow-sm)'
+              }}>
+                {/* Price */}
+                <div style={{ 
+                  display: 'flex', alignItems: 'baseline', gap: '0.5rem', 
+                  marginBottom: '1.75rem', paddingBottom: '1.75rem',
+                  borderBottom: '1px solid var(--border)'
+                }}>
+                  <span style={{ 
+                    fontSize: '2.25rem', fontWeight: '800', letterSpacing: '-0.03em',
+                    fontFamily: 'var(--font-display)'
+                  }}>
+                    ₹{isNeemSticks ? (product.pricePerGram * 12).toFixed(2) : product.pricePerGram.toFixed(2)}
+                  </span>
+                  <span style={{ 
+                    fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: '500' 
+                  }}>
+                    {isNeemSticks ? 'per 12 pieces' : 'per gram'}
+                  </span>
+                </div>
+
+                {/* Quick Weight Selection */}
+                <div style={{ marginBottom: '1.25rem' }}>
+                  <label style={{ 
+                    display: 'block', marginBottom: '0.75rem', fontWeight: '600', 
+                    fontSize: '0.78rem', textTransform: 'uppercase', 
+                    letterSpacing: '0.06em', color: 'var(--text-muted)',
+                    fontFamily: 'var(--font-mono)'
+                  }}>
+                    Quick Select
+                  </label>
+                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    {quickWeights.map(w => (
+                      <motion.button
+                        key={w}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => { setGrams(w); setIsAdded(false); }}
+                        style={{
+                          padding: '0.45rem 0.9rem',
+                          borderRadius: 'var(--radius-full)',
+                          border: '1px solid',
+                          borderColor: grams === w ? 'var(--text-primary)' : 'var(--border)',
+                          background: grams === w ? 'var(--text-primary)' : 'transparent',
+                          color: grams === w ? 'var(--text-inverse)' : 'var(--text-secondary)',
+                          fontSize: '0.78rem',
+                          fontWeight: '600',
+                          cursor: 'pointer',
+                          fontFamily: 'var(--font-body)',
+                          transition: 'all 0.2s'
+                        }}
+                      >
+                        {isNeemSticks ? `${w} pcs` : `${w}g`}
+                      </motion.button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Custom Quantity */}
+                <div style={{ marginBottom: '1.75rem' }}>
+                  <label style={{ 
+                    display: 'block', marginBottom: '0.75rem', fontWeight: '600', 
+                    fontSize: '0.78rem', textTransform: 'uppercase', 
+                    letterSpacing: '0.06em', color: 'var(--text-muted)',
+                    fontFamily: 'var(--font-mono)'
+                  }}>
+                    {isNeemSticks ? 'Custom Quantity (pieces)' : 'Custom Quantity (grams)'}
+                  </label>
+                  <div style={{ 
+                    display: 'flex', alignItems: 'center', gap: '0.75rem',
+                    background: 'var(--bg-secondary)', padding: '0.5rem',
+                    borderRadius: 'var(--radius-xl)', border: '1px solid var(--border)'
+                  }}>
+                    <motion.button
+                      whileTap={{ scale: 0.9 }}
+                      onClick={() => { setGrams(Math.max(0, grams - (isNeemSticks ? 12 : 50))); setIsAdded(false); }}
+                      style={{
+                        width: '40px', height: '40px', borderRadius: 'var(--radius-lg)',
+                        background: 'white', border: '1px solid var(--border)',
+                        cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                      }}
+                    >
+                      <Minus size={16} />
+                    </motion.button>
+                    <input 
+                      type="number" 
+                      value={grams} 
+                      onChange={(e) => { setGrams(Math.max(0, parseInt(e.target.value) || 0)); setIsAdded(false); }} 
+                      style={{ 
+                        width: '100%', textAlign: 'center', border: 'none', 
+                        background: 'transparent', fontWeight: '700', fontSize: '1.15rem',
+                        outline: 'none', fontFamily: 'var(--font-display)'
+                      }}
+                    />
+                    <motion.button
+                      whileTap={{ scale: 0.9 }}
+                      onClick={() => { setGrams(grams + (isNeemSticks ? 12 : 50)); setIsAdded(false); }}
+                      style={{
+                        width: '40px', height: '40px', borderRadius: 'var(--radius-lg)',
+                        background: 'white', border: '1px solid var(--border)',
+                        cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                      }}
+                    >
+                      <Plus size={16} />
+                    </motion.button>
+                  </div>
+                </div>
+                
+                {/* Total */}
+                <div style={{ 
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center', 
+                  padding: '1.25rem 0', borderTop: '1px dashed var(--border)',
+                  borderBottom: '1px dashed var(--border)', marginBottom: '1.75rem'
+                }}>
+                  <span style={{ 
+                    fontSize: '0.82rem', fontWeight: '700', color: 'var(--text-secondary)',
+                    fontFamily: 'var(--font-mono)', letterSpacing: '0.04em', textTransform: 'uppercase'
+                  }}>
+                    Estimated Total
+                  </span>
+                  <span style={{ 
+                    fontSize: '1.75rem', fontWeight: '800', 
+                    fontFamily: 'var(--font-display)', letterSpacing: '-0.03em',
+                    color: 'var(--text-primary)'
+                  }}>
+                    ₹{totalPrice.toFixed(2)}
+                  </span>
+                </div>
+                
+                {/* Add to Cart Button */}
+                <motion.button 
+                  whileHover={{ scale: 1.015 }}
+                  whileTap={{ scale: 0.985 }}
+                  className="btn btn-primary btn-xl" 
+                  style={{ 
+                    width: '100%', borderRadius: 'var(--radius-xl)', height: '3.5rem',
+                    fontSize: '0.95rem'
+                  }} 
+                  onClick={() => {
+                    addToCart(product, grams, totalPrice);
+                    setIsAdded(true);
+                  }}
+                >
+                  <AnimatePresence mode='wait'>
+                    {isAdded ? (
+                      <motion.span 
+                        key="added"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0 }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                      >
+                        <Check size={18} /> Added to Manifest
+                      </motion.span>
+                    ) : (
+                      <motion.span 
+                        key="add"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                      >
+                        <ShoppingCart size={18} /> Add to Manifest
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </motion.button>
+              </div>
+
+              {/* Trust Signals */}
+              <div style={{ 
+                display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'
+              }}>
+                {[
+                  { 
+                    icon: ShieldCheck, 
+                    title: 'Quality Inspected', 
+                    desc: 'Batch: GRADE-A-EXP', 
+                    bg: 'var(--emerald-surface)', color: 'var(--emerald)' 
+                  },
+                  { 
+                    icon: Truck, 
+                    title: 'Export Secure', 
+                    desc: 'Transit insured', 
+                    bg: 'var(--sapphire-surface)', color: 'var(--sapphire)' 
+                  }
+                ].map((item, i) => (
+                  <motion.div 
+                    key={i}
+                    whileHover={{ y: -3 }}
+                    className="card"
+                    style={{ padding: '1.25rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}
+                  >
+                    <div style={{ 
+                      background: item.bg, color: item.color, 
+                      padding: '0.6rem', borderRadius: 'var(--radius-lg)', flexShrink: 0 
+                    }}>
+                      <item.icon size={18} />
+                    </div>
+                    <div>
+                      <h4 style={{ fontWeight: '700', fontSize: '0.82rem', marginBottom: '0.1rem' }}>{item.title}</h4>
+                      <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{item.desc}</p>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
-
-            {/* Custom Quantity */}
-            <div style={{ marginBottom: '1.75rem' }}>
-              <label style={{ 
-                display: 'block', marginBottom: '0.75rem', fontWeight: '600', 
-                fontSize: '0.78rem', textTransform: 'uppercase', 
-                letterSpacing: '0.06em', color: 'var(--text-muted)',
-                fontFamily: 'var(--font-mono)'
-              }}>
-                Custom Quantity (grams)
-              </label>
-              <div style={{ 
-                display: 'flex', alignItems: 'center', gap: '0.75rem',
-                background: 'var(--bg-secondary)', padding: '0.5rem',
-                borderRadius: 'var(--radius-xl)', border: '1px solid var(--border)'
-              }}>
-                <motion.button
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => { setGrams(Math.max(0, grams - 50)); setIsAdded(false); }}
-                  style={{
-                    width: '40px', height: '40px', borderRadius: 'var(--radius-lg)',
-                    background: 'white', border: '1px solid var(--border)',
-                    cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center'
-                  }}
-                >
-                  <Minus size={16} />
-                </motion.button>
-                <input 
-                  type="number" 
-                  value={grams} 
-                  onChange={(e) => { setGrams(Math.max(0, parseInt(e.target.value) || 0)); setIsAdded(false); }} 
-                  style={{ 
-                    width: '100%', textAlign: 'center', border: 'none', 
-                    background: 'transparent', fontWeight: '700', fontSize: '1.15rem',
-                    outline: 'none', fontFamily: 'var(--font-display)'
-                  }}
-                />
-                <motion.button
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => { setGrams(grams + 50); setIsAdded(false); }}
-                  style={{
-                    width: '40px', height: '40px', borderRadius: 'var(--radius-lg)',
-                    background: 'white', border: '1px solid var(--border)',
-                    cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center'
-                  }}
-                >
-                  <Plus size={16} />
-                </motion.button>
-              </div>
-            </div>
-            
-            {/* Total */}
-            <div style={{ 
-              display: 'flex', justifyContent: 'space-between', alignItems: 'center', 
-              padding: '1.25rem 0', borderTop: '1px dashed var(--border)',
-              borderBottom: '1px dashed var(--border)', marginBottom: '1.75rem'
-            }}>
-              <span style={{ 
-                fontSize: '0.82rem', fontWeight: '700', color: 'var(--text-secondary)',
-                fontFamily: 'var(--font-mono)', letterSpacing: '0.04em', textTransform: 'uppercase'
-              }}>
-                Estimated Total
-              </span>
-              <span style={{ 
-                fontSize: '1.75rem', fontWeight: '800', 
-                fontFamily: 'var(--font-display)', letterSpacing: '-0.03em',
-                color: 'var(--text-primary)'
-              }}>
-                ₹{totalPrice.toFixed(2)}
-              </span>
-            </div>
-            
-            {/* Add to Cart Button */}
-            <motion.button 
-              whileHover={{ scale: 1.015 }}
-              whileTap={{ scale: 0.985 }}
-              className="btn btn-primary btn-xl" 
-              style={{ 
-                width: '100%', borderRadius: 'var(--radius-xl)', height: '3.5rem',
-                fontSize: '0.95rem'
-              }} 
-              onClick={() => {
-                addToCart(product, grams, totalPrice);
-                setIsAdded(true);
-              }}
-            >
-              <AnimatePresence mode='wait'>
-                {isAdded ? (
-                  <motion.span 
-                    key="added"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
-                  >
-                    <Check size={18} /> Added to Manifest
-                  </motion.span>
-                ) : (
-                  <motion.span 
-                    key="add"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
-                  >
-                    <ShoppingCart size={18} /> Add to Manifest
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </motion.button>
-          </div>
-
-          {/* Trust Signals */}
-          <div style={{ 
-            display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'
-          }}>
-            {[
-              { 
-                icon: ShieldCheck, 
-                title: 'Quality Inspected', 
-                desc: 'Batch: GRADE-A-EXP', 
-                bg: 'var(--emerald-surface)', color: 'var(--emerald)' 
-              },
-              { 
-                icon: Truck, 
-                title: 'Export Secure', 
-                desc: 'Transit insured', 
-                bg: 'var(--sapphire-surface)', color: 'var(--sapphire)' 
-              }
-            ].map((item, i) => (
-              <motion.div 
-                key={i}
-                whileHover={{ y: -3 }}
-                className="card"
-                style={{ padding: '1.25rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}
-              >
-                <div style={{ 
-                  background: item.bg, color: item.color, 
-                  padding: '0.6rem', borderRadius: 'var(--radius-lg)', flexShrink: 0 
-                }}>
-                  <item.icon size={18} />
-                </div>
-                <div>
-                  <h4 style={{ fontWeight: '700', fontSize: '0.82rem', marginBottom: '0.1rem' }}>{item.title}</h4>
-                  <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{item.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          )}
         </motion.div>
       </div>
 
@@ -401,7 +630,7 @@ export default function ProductDetails() {
                       fontFamily: 'var(--font-mono)', fontSize: '0.78rem', 
                       fontWeight: '600', color: 'var(--text-secondary)'
                     }}>
-                      ₹{p.pricePerGram}/g
+                      {p.isDress ? `₹${p.apparelPrice.total} pack` : (p.name.toLowerCase().includes('neem') ? `₹${(p.pricePerGram * 12).toFixed(0)} / 12 pcs` : `₹${p.pricePerGram}/g`)}
                     </div>
                   </div>
                 </motion.div>
